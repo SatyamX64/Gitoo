@@ -27,6 +27,7 @@ dependencies:
   animated_text_kit: ^2.0.1
   audioplayers: ^0.15.1
   font_awesome_flutter: ^8.8.1
+  http: ^0.12.1
 
 
 dev_dependencies:

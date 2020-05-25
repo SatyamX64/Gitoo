@@ -6,8 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gitoo/Shared_Widgets.dart';
 import 'Constants.dart';
 
-void getTheme() {}
-
 class RepoPage extends StatefulWidget {
   @override
   _RepoPageState createState() => _RepoPageState();
@@ -108,15 +106,18 @@ class _RepoPageState extends State<RepoPage>
                                     blurRadius: 10,
                                   )
                                 ],
-                                borderRadius: BorderRadius.circular(15)),
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: Text(
-                                'Following',
-                                style: TextStyle(
-                                    color: kTinder,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
+                                borderRadius: BorderRadius.circular(2)),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 3),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  'sgshubham98@github.com.io',
+                                  style: TextStyle(
+                                      color: kGreen,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
                               ),
                             ),
                           ),
@@ -134,28 +135,31 @@ class _RepoPageState extends State<RepoPage>
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.person,
-                                              color: kIconColor,
-                                              size: 70,
-                                            ),
-                                            Text(
-                                              'Followers',
-                                              style: TextStyle(
-                                                  color: kIconColor,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
-                                            ),
-                                            Text(
-                                              '54',
-                                              style: TextStyle(
-                                                  color: kIconColor,
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
+                                        Expanded(
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.group,
+                                                color: kGreen,
+                                                size: 70,
+                                              ),
+                                              Text(
+                                                'Followers',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                              Text(
+                                                '54',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 25,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                         SizedBox(
                                           child: VerticalDivider(
@@ -163,28 +167,31 @@ class _RepoPageState extends State<RepoPage>
                                           ),
                                           height: 70,
                                         ),
-                                        Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              FontAwesomeIcons.marsStrokeV,
-                                              color: kIconColor,
-                                              size: 70,
-                                            ),
-                                            Text(
-                                              'Following',
-                                              style: TextStyle(
-                                                  color: kIconColor,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
-                                            ),
-                                            Text(
-                                              '32',
-                                              style: TextStyle(
-                                                  color: kIconColor,
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
+                                        Expanded(
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.directions_run,
+                                                color: kGreen,
+                                                size: 70,
+                                              ),
+                                              Text(
+                                                'Following',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                              Text(
+                                                '32',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 25,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -198,21 +205,21 @@ class _RepoPageState extends State<RepoPage>
                                     child: Column(
                                       children: <Widget>[
                                         Icon(
-                                          Icons.whatshot,
-                                          color: kIconColor,
+                                          Icons.star,
+                                          color: kYellow,
                                           size: 70,
                                         ),
                                         Text(
-                                          'Repos',
+                                          'Starred',
                                           style: TextStyle(
-                                              color: kIconColor,
+                                              color: Colors.white,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20),
                                         ),
                                         Text(
                                           '54',
                                           style: TextStyle(
-                                              color: kIconColor,
+                                              color: Colors.white,
                                               fontSize: 25,
                                               fontWeight: FontWeight.bold),
                                         )
@@ -240,21 +247,21 @@ class _RepoPageState extends State<RepoPage>
                                         Column(
                                           children: <Widget>[
                                             Icon(
-                                              Icons.person,
-                                              color: kIconColor,
+                                              Icons.pets,
+                                              color: kOrange,
                                               size: 70,
                                             ),
                                             Text(
-                                              'Followers',
+                                              'Repos',
                                               style: TextStyle(
-                                                  color: kIconColor,
+                                                  color: Colors.white,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 20),
                                             ),
                                             Text(
-                                              '54',
+                                              '540',
                                               style: TextStyle(
-                                                  color: kIconColor,
+                                                  color: Colors.white,
                                                   fontSize: 25,
                                                   fontWeight: FontWeight.bold),
                                             )
@@ -269,21 +276,21 @@ class _RepoPageState extends State<RepoPage>
                                         Column(
                                           children: <Widget>[
                                             Icon(
-                                              FontAwesomeIcons.marsStrokeV,
-                                              color: kIconColor,
+                                              Icons.language,
+                                              color: kOrange,
                                               size: 70,
                                             ),
                                             Text(
-                                              'Following',
+                                              'Languages',
                                               style: TextStyle(
-                                                  color: kIconColor,
+                                                  color: Colors.white,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 20),
                                             ),
                                             Text(
-                                              '32',
+                                              '3',
                                               style: TextStyle(
-                                                  color: kIconColor,
+                                                  color: Colors.white,
                                                   fontSize: 25,
                                                   fontWeight: FontWeight.bold),
                                             )
@@ -307,11 +314,11 @@ class _RepoPageState extends State<RepoPage>
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
-                                                Icon(
-                                                  Icons.whatshot,
-                                                  color: kIconColor,
-                                                  size: 50,
-                                                ),
+                                                CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                      'https://avatars0.githubusercontent.com/u/47293749?v=4'),
+                                                  radius: 25,
+                                                )
                                               ],
                                             ),
                                           ),
@@ -324,11 +331,11 @@ class _RepoPageState extends State<RepoPage>
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
-                                                Icon(
-                                                  Icons.whatshot,
-                                                  color: kIconColor,
-                                                  size: 50,
-                                                ),
+                                                CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                      'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/ubuntu/ubuntu.png'),
+                                                  radius: 25,
+                                                )
                                               ],
                                             ),
                                           ),
@@ -353,7 +360,7 @@ class _RepoPageState extends State<RepoPage>
                                     child: Text(
                                       'DSC||COMPETITIVE CODER||DEMO',
                                       style: TextStyle(
-                                          color: kIconColor,
+                                          color: Colors.white,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -396,129 +403,3 @@ class _RepoPageState extends State<RepoPage>
     );
   }
 }
-//import 'package:flutter/gestures.dart';
-//import 'package:flutter/material.dart';
-//import 'package:flutter/painting.dart';
-//import 'package:gitoo/Shared_Widgets.dart';
-//
-//import 'Constants.dart';
-//
-//Color kBlack = Color(0xFF000000);
-//Color kDimBlack = Color(0xFF15202B);
-//Color kBBColor = Color(0xFF010c16);
-//Color kNBlack = Color(0xFF080d11);
-////Color kWhite = Color(0xFFFFFFFF);
-////Color kShadow = Color(0xFFA80030);
-////Color kBlue = Color(0xFF06637F);
-////Color kLShadow = Color(0xFFe00846);
-////Color kDirtyYellow = Color(0xFFdbb11c);
-//
-//class RepoPage extends StatefulWidget {
-//  @override
-//  _RepoPageState createState() => _RepoPageState();
-//}
-//
-//class _RepoPageState extends State<RepoPage>
-//    with SingleTickerProviderStateMixin {
-//  AnimationController controller;
-//  @override
-//  void initState() {
-//    super.initState();
-//    controller = AnimationController(
-//      vsync: this,
-//      duration: Duration(seconds: 1),
-//      upperBound: 80,
-//    );
-//    controller.forward();
-//    controller.addListener(() {
-//      setState(() {});
-//    });
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      bottomNavigationBar: BottomNavigationBar(
-//        type: BottomNavigationBarType.fixed,
-//        currentIndex: 0,
-//        backgroundColor: Color(0xFFE0E5EC),
-//        items: [
-//          BottomNavigationBarItem(
-//            icon: BottomBarButton(
-//              icon: Icons.home,
-//              title: 'Home',
-//            ),
-//            title: Visibility(visible: false, child: Text('')),
-//          ),
-//          BottomNavigationBarItem(
-//            icon: BottomBarButton(
-//              icon: Icons.graphic_eq,
-//              title: 'Analytics',
-//            ),
-//            title: Visibility(visible: false, child: Text('')),
-//          ),
-//          BottomNavigationBarItem(
-//            icon: BottomBarButton(
-//              icon: Icons.info,
-//              title: 'Rating',
-//            ),
-//            title: Visibility(visible: false, child: Text('')),
-//          ),
-//        ],
-//      ),
-//      backgroundColor: Color(0xFFE0E5EC),
-//      body: Stack(
-//        children: <Widget>[
-//          Container(
-//            width: double.maxFinite,
-//            height: double.maxFinite,
-//            margin: EdgeInsets.only(top: 200),
-//            decoration: BoxDecoration(color: Color(0xFFE0E5EC), boxShadow: [
-//              BoxShadow(
-//                color: Color(0xFFFFFFFF),
-//                blurRadius: 10,
-//                offset: Offset(0, -5),
-//              ),
-//            ]),
-//          ),
-//          Positioned(
-//            top: 100,
-//            left: 20,
-//            child: Container(
-//              decoration: BoxDecoration(
-//                boxShadow: [
-//                  BoxShadow(
-//                    color: Color(0xFFFFFFFF),
-//                    offset: Offset(3, 6),
-//                    blurRadius: 10,
-//                  ),
-//                ],
-//                shape: BoxShape.circle,
-//              ),
-//              child: CircleAvatar(
-//                radius: controller.value,
-//                backgroundColor: Colors.blueGrey,
-//                backgroundImage: NetworkImage(
-//                    'https://avatars0.githubusercontent.com/u/62766656?v=4'),
-//              ),
-//            ),
-//          ),
-//          Positioned(
-//            left: 190,
-//            top: 150,
-//            child: Container(
-//              child: Text(
-//                'SatyamX64',
-//                style: TextStyle(
-//                  fontSize: 30,
-//                  fontWeight: FontWeight.bold,
-//                  color: kNBlack.withOpacity(0.8),
-//                ),
-//              ),
-//            ),
-//          )
-//        ],
-//      ),
-//    );
-//  }
-//}

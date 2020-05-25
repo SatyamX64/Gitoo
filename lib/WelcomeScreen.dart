@@ -2,12 +2,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gitoo/SplashScreen.dart';
-import 'HomePage.dart';
-import 'Constants.dart';
 import 'package:audioplayers/audio_cache.dart';
 
 class WelcomeScreen extends StatefulWidget {
