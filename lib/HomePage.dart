@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gitoo/Organizations.dart';
 import 'package:gitoo/Shared_Widgets.dart';
 import 'package:gitoo/Social.dart';
@@ -10,12 +9,12 @@ import 'Constants.dart';
 import 'Starred.dart';
 import 'Technical.dart';
 
-class RepoPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _RepoPageState createState() => _RepoPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _RepoPageState extends State<RepoPage>
+class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
@@ -26,10 +25,7 @@ class _RepoPageState extends State<RepoPage>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFF243441),
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: 0,
           backgroundColor: kPrimary,
           items: [
             BottomNavigationBarItem(
@@ -86,7 +82,7 @@ class _RepoPageState extends State<RepoPage>
                   child: Container(
                     width: double.maxFinite,
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    decoration: BoxDecoration(color: kSecondary),
+                    decoration: BoxDecoration(color: kPrimary),
                     child: Column(
                       children: <Widget>[
                         Expanded(
@@ -161,7 +157,7 @@ class _RepoPageState extends State<RepoPage>
                                                 Text(
                                                   'Followers',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: kRepoFont,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 20),
@@ -169,7 +165,7 @@ class _RepoPageState extends State<RepoPage>
                                                 Text(
                                                   '54',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: kRepoFont2,
                                                       fontSize: 25,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -194,7 +190,7 @@ class _RepoPageState extends State<RepoPage>
                                                 Text(
                                                   'Following',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: kRepoFont,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 20),
@@ -202,7 +198,7 @@ class _RepoPageState extends State<RepoPage>
                                                 Text(
                                                   '32',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: kRepoFont2,
                                                       fontSize: 25,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -241,14 +237,14 @@ class _RepoPageState extends State<RepoPage>
                                           Text(
                                             'Starred',
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: kRepoFont,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20),
                                           ),
                                           Text(
                                             '54',
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: kRepoFont2,
                                                 fontSize: 25,
                                                 fontWeight: FontWeight.bold),
                                           )
@@ -295,14 +291,14 @@ class _RepoPageState extends State<RepoPage>
                                               Text(
                                                 'Repos',
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: kRepoFont,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20),
                                               ),
                                               Text(
                                                 '540',
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: kRepoFont2,
                                                     fontSize: 25,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -325,14 +321,14 @@ class _RepoPageState extends State<RepoPage>
                                               Text(
                                                 'Languages',
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: kRepoFont,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20),
                                               ),
                                               Text(
                                                 '3',
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: kRepoFont2,
                                                     fontSize: 25,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -422,7 +418,7 @@ class _RepoPageState extends State<RepoPage>
                                     child: Text(
                                       'DSC||COMPETITIVE CODER||DEMO',
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: kRepoFont,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -439,24 +435,30 @@ class _RepoPageState extends State<RepoPage>
               ],
             ),
             Positioned(
-              top: (MediaQuery.of(context).size.height) / 8,
+              top: (MediaQuery.of(context).size.height) / 10,
               left: 20,
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: [
-                    BoxShadow(
-                      color: kNeon,
-                      blurRadius: 5,
-                    ),
+                    BoxShadow(color: kNeon, spreadRadius: 5),
                   ],
                   shape: BoxShape.circle,
                 ),
                 child: CircleAvatar(
                   radius: 60,
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: kSecondary,
                   backgroundImage: NetworkImage(
                       'https://avatars0.githubusercontent.com/u/62766656?v=4'),
                 ),
+              ),
+            ),
+            Positioned(
+              top: 20,
+              right: 10,
+              child: Text(
+                'Gitoo',
+                style: TextStyle(
+                    color: kNeon, fontSize: 50, fontWeight: FontWeight.w900),
               ),
             ),
           ],

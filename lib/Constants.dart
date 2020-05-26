@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 Color kPrimary = Color(0xFF1A252E);
 Color kLPrimary = Color(0xFF414d56);
 Color kDPrimary = Colors.black;
+//Color kSecondary = Color(0xFF1A252E);
+//Color kLSecondary = Color(0xFF414d56);
+//Color kDSecondary = Colors.black;
 Color kSecondary = Color(0xFF243441);
 Color kLSecondary = Color(0xFF414d56);
 Color kDSecondary = Color(0xFF1A252E);
@@ -14,8 +17,25 @@ Color kGreen = Color(0xFF17BF63);
 Color kPurple = Color(0xFF794BC4);
 Color kOrange = Color(0xFFF45D22);
 Color kFontColor = Colors.white;
+Color kRepoFont = kNeon;
+Color kRepoFont2 = Colors.white;
 
-TextStyle kGeneralText = TextStyle(
+TextStyle kInsideText = TextStyle(
+  color: kFontColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 15,
+);
+TextStyle kInsideHeading = TextStyle(
+  color: kFontColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 15,
+);
+TextStyle kHomeText = TextStyle(
+  color: kFontColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 15,
+);
+TextStyle kHomeHeading = TextStyle(
   color: kFontColor,
   fontWeight: FontWeight.bold,
   fontSize: 15,

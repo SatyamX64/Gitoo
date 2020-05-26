@@ -52,7 +52,7 @@ class Repos extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 '${repos[index]}',
-                style: kGeneralText,
+                style: kInsideHeading,
               ));
         },
         separatorBuilder: (BuildContext context, index) {
@@ -66,7 +66,7 @@ class Repos extends StatelessWidget {
       return Center(
         child: Text(
           'Bhai ne abhi tak kuch nahi banaya hai',
-          style: kGeneralText,
+          style: kInsideHeading,
         ),
       );
     }
@@ -83,7 +83,7 @@ class Languages extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 '${languages[index]}',
-                style: kGeneralText,
+                style: kInsideHeading,
               ));
         },
         separatorBuilder: (BuildContext context, index) {
@@ -97,7 +97,7 @@ class Languages extends StatelessWidget {
       return Center(
         child: Text(
           'Bhai abhi learning phase mein hai',
-          style: kGeneralText,
+          style: kInsideHeading,
         ),
       );
     }

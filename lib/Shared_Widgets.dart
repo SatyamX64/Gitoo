@@ -34,18 +34,18 @@ class GoodBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: kSecondary,
-          borderRadius: BorderRadius.circular(15),
+          color: kPrimary,
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: kDPrimary,
-              offset: Offset(9, 9),
-              blurRadius: 6,
+              offset: Offset(4, 4),
+              blurRadius: 10,
             ),
             BoxShadow(
-              color: kLSecondary,
+              color: kLPrimary,
               offset: Offset(-2, -2),
-              blurRadius: 3,
+              blurRadius: 6,
             ),
           ]),
       child: Padding(

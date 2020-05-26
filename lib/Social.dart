@@ -18,7 +18,7 @@ class _SocialState extends State<Social> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: kPrimary,
-            title: Text('Bhai ka Social Circle '),
+            title: Text('Bhai ka Social Circle ',style: ,),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -52,7 +52,7 @@ class Followers extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 '${followers[index]}',
-                style: kGeneralText,
+                style: kInsideHeading,
               ));
         },
         separatorBuilder: (BuildContext context, index) {
@@ -66,7 +66,7 @@ class Followers extends StatelessWidget {
       return Center(
         child: Text(
           'Bhai ko koi Follow Nahi karta',
-          style: kGeneralText,
+          style: kInsideHeading,
         ),
       );
     }
@@ -83,7 +83,7 @@ class Following extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 '${following[index]}',
-                style: kGeneralText,
+                style: kInsideHeading,
               ));
         },
         separatorBuilder: (BuildContext context, index) {
@@ -97,7 +97,7 @@ class Following extends StatelessWidget {
       return Center(
         child: Text(
           'Bhai bhi kisi ko Follow Nahi karta',
-          style: kGeneralText,
+          style: kInsideHeading,
         ),
       );
     }

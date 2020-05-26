@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'RepoPage.dart';
+import 'HomePage.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void fun() {
     Future.delayed(Duration(seconds: 5), () {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return RepoPage();
+        return HomePage();
       }));
     });
   }

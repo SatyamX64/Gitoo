@@ -31,7 +31,7 @@ Widget getList() {
         itemBuilder: (BuildContext context, index) {
           return Text(
             '${starred[index]}',
-            style: kGeneralText,
+            style: kInsideHeading,
           );
         },
         separatorBuilder: (BuildContext context, index) {
@@ -44,7 +44,7 @@ Widget getList() {
     return Center(
       child: Text(
         'Bhai ko kisi ka kaam acha nahi lagta',
-        style: kGeneralText,
+        style: kInsideHeading,
       ),
     );
   }

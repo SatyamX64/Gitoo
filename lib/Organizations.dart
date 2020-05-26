@@ -5,7 +5,7 @@ List<String> organizations = [
 //  'Andi',
 //  'Bandi',
 //  'Sandi',
-]
+];
 
 class Organizations extends StatelessWidget {
   @override
@@ -31,7 +31,7 @@ Widget getList() {
         itemBuilder: (BuildContext context, index) {
           return Text(
             '${organizations[index]}',
-            style: kGeneralText,
+            style: kInsideHeading,
           );
         },
         separatorBuilder: (BuildContext context, index) {
@@ -44,7 +44,7 @@ Widget getList() {
     return Center(
       child: Text(
         'Bhai ko abhi kahi bhi kaam nhi mila',
-        style: kGeneralText,
+        style: kInsideHeading,
       ),
     );
   }
