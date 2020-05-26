@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gitoo/Constants.dart';
 
+List<String> starred = [
+//  'Andi',
+//  'Bandi',
+//  'Sandi',
+];
+
 class Starred extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -11,13 +17,34 @@ class Starred extends StatelessWidget {
           backgroundColor: kPrimary,
         ),
         body: Container(
-          color: kSecondary,
-          alignment: AlignmentDirectional.center,
-          child: Text(
-            'Bhai ko kisi ka kaam acha nahi lagta',
-            style: TextStyle(color: Colors.white),
-          ),
+          child: getList(),
+          color: kPrimary,
         ),
+      ),
+    );
+  }
+}
+
+Widget getList() {
+  if (starred.isNotEmpty) {
+    return ListView.separated(
+        itemBuilder: (BuildContext context, index) {
+          return Text(
+            '${starred[index]}',
+            style: kGeneralText,
+          );
+        },
+        separatorBuilder: (BuildContext context, index) {
+          return Divider(
+            color: kLPrimary,
+          );
+        },
+        itemCount: starred.length);
+  } else {
+    return Center(
+      child: Text(
+        'Bhai ko kisi ka kaam acha nahi lagta',
+        style: kGeneralText,
       ),
     );
   }

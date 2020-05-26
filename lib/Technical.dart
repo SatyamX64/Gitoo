@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gitoo/Constants.dart';
 
+List<String> repos = [];
+List<String> languages = [];
+
 class Technical extends StatefulWidget {
   @override
   _TechnicalState createState() => _TechnicalState();
@@ -22,13 +25,16 @@ class _TechnicalState extends State<Technical> {
                   text: 'Repos',
                 ),
                 Tab(
-                  text: 'Languages',
+                  text: 'languages',
                 ),
               ],
             ),
           ),
-          body: TabBarView(
-            children: <Widget>[One(), Two()],
+          body: Container(
+            color: kPrimary,
+            child: TabBarView(
+              children: <Widget>[Repos(), Languages()],
+            ),
           ),
         ),
       ),
@@ -36,30 +42,64 @@ class _TechnicalState extends State<Technical> {
   }
 }
 
-class One extends StatelessWidget {
+class Repos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      color: kSecondary,
-      child: Text(
-        'Bhai ne abhi tak kuch nahi banaya hai',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
+    if (repos.isNotEmpty) {
+      return ListView.separated(
+        itemBuilder: (BuildContext context, index) {
+          return Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                '${repos[index]}',
+                style: kGeneralText,
+              ));
+        },
+        separatorBuilder: (BuildContext context, index) {
+          return Divider(
+            color: kLPrimary,
+          );
+        },
+        itemCount: repos.length,
+      );
+    } else {
+      return Center(
+        child: Text(
+          'Bhai ne abhi tak kuch nahi banaya hai',
+          style: kGeneralText,
+        ),
+      );
+    }
   }
 }
 
-class Two extends StatelessWidget {
+class Languages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: kSecondary,
-      alignment: Alignment.center,
-      child: Text(
-        'Bhai abhi learning phase mein hai',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
+    if (languages.isNotEmpty) {
+      return ListView.separated(
+        itemBuilder: (BuildContext context, index) {
+          return Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                '${languages[index]}',
+                style: kGeneralText,
+              ));
+        },
+        separatorBuilder: (BuildContext context, index) {
+          return Divider(
+            color: kLPrimary,
+          );
+        },
+        itemCount: languages.length,
+      );
+    } else {
+      return Center(
+        child: Text(
+          'Bhai abhi learning phase mein hai',
+          style: kGeneralText,
+        ),
+      );
+    }
   }
 }

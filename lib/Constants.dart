@@ -13,3 +13,10 @@ Color kYellow = Color(0xFFFFAD1F);
 Color kGreen = Color(0xFF17BF63);
 Color kPurple = Color(0xFF794BC4);
 Color kOrange = Color(0xFFF45D22);
+Color kFontColor = Colors.white;
+
+TextStyle kGeneralText = TextStyle(
+  color: kFontColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 15,
+);

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gitoo/Constants.dart';
 
+List<String> followers = [];
+List<String> following = [];
+
 class Social extends StatefulWidget {
   @override
   _SocialState createState() => _SocialState();
@@ -27,8 +30,11 @@ class _SocialState extends State<Social> {
               ],
             ),
           ),
-          body: TabBarView(
-            children: <Widget>[One(), Two()],
+          body: Container(
+            color: kPrimary,
+            child: TabBarView(
+              children: <Widget>[Followers(), Following()],
+            ),
           ),
         ),
       ),
@@ -36,30 +42,64 @@ class _SocialState extends State<Social> {
   }
 }
 
-class One extends StatelessWidget {
+class Followers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      color: kSecondary,
-      child: Text(
-        'Bhai ko koi Follow nahi karta',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
+    if (followers.isNotEmpty) {
+      return ListView.separated(
+        itemBuilder: (BuildContext context, index) {
+          return Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                '${followers[index]}',
+                style: kGeneralText,
+              ));
+        },
+        separatorBuilder: (BuildContext context, index) {
+          return Divider(
+            color: kLPrimary,
+          );
+        },
+        itemCount: followers.length,
+      );
+    } else {
+      return Center(
+        child: Text(
+          'Bhai ko koi Follow Nahi karta',
+          style: kGeneralText,
+        ),
+      );
+    }
   }
 }
 
-class Two extends StatelessWidget {
+class Following extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: kSecondary,
-      alignment: Alignment.center,
-      child: Text(
-        'Bhai bhi kisi ko Follow nahi karta',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
+    if (following.isNotEmpty) {
+      return ListView.separated(
+        itemBuilder: (BuildContext context, index) {
+          return Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                '${following[index]}',
+                style: kGeneralText,
+              ));
+        },
+        separatorBuilder: (BuildContext context, index) {
+          return Divider(
+            color: kLPrimary,
+          );
+        },
+        itemCount: following.length,
+      );
+    } else {
+      return Center(
+        child: Text(
+          'Bhai bhi kisi ko Follow Nahi karta',
+          style: kGeneralText,
+        ),
+      );
+    }
   }
 }
