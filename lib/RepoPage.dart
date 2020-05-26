@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gitoo/Organizations.dart';
 import 'package:gitoo/Shared_Widgets.dart';
+import 'package:gitoo/Social.dart';
 import 'Constants.dart';
+import 'Starred.dart';
+import 'Technical.dart';
 
 class RepoPage extends StatefulWidget {
   @override
@@ -130,70 +134,84 @@ class _RepoPageState extends State<RepoPage>
                               children: <Widget>[
                                 Expanded(
                                   flex: 2,
-                                  child: GoodBox(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.group,
-                                                color: kGreen,
-                                                size: 70,
-                                              ),
-                                              Text(
-                                                'Followers',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
-                                              ),
-                                              Text(
-                                                '54',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 25,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )
-                                            ],
-                                          ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return Social();
+                                          },
                                         ),
-                                        SizedBox(
-                                          child: VerticalDivider(
-                                            color: Color(0xFF7C858D),
+                                      );
+                                    },
+                                    child: GoodBox(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.group,
+                                                  color: kGreen,
+                                                  size: 70,
+                                                ),
+                                                Text(
+                                                  'Followers',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20),
+                                                ),
+                                                Text(
+                                                  '54',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 25,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                          height: 70,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.directions_run,
-                                                color: kGreen,
-                                                size: 70,
-                                              ),
-                                              Text(
-                                                'Following',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
-                                              ),
-                                              Text(
-                                                '32',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 25,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )
-                                            ],
+                                          SizedBox(
+                                            child: VerticalDivider(
+                                              color: Color(0xFF7C858D),
+                                            ),
+                                            height: 70,
                                           ),
-                                        ),
-                                      ],
+                                          Expanded(
+                                            child: Column(
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.directions_run,
+                                                  color: kGreen,
+                                                  size: 70,
+                                                ),
+                                                Text(
+                                                  'Following',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20),
+                                                ),
+                                                Text(
+                                                  '32',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 25,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -201,29 +219,41 @@ class _RepoPageState extends State<RepoPage>
                                   width: 15,
                                 ),
                                 Expanded(
-                                  child: GoodBox(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.star,
-                                          color: kYellow,
-                                          size: 70,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return Starred();
+                                          },
                                         ),
-                                        Text(
-                                          'Starred',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
-                                        Text(
-                                          '54',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold),
-                                        )
-                                      ],
+                                      );
+                                    },
+                                    child: GoodBox(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.star,
+                                            color: kYellow,
+                                            size: 70,
+                                          ),
+                                          Text(
+                                            'Starred',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
+                                          ),
+                                          Text(
+                                            '54',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -239,64 +269,78 @@ class _RepoPageState extends State<RepoPage>
                               children: <Widget>[
                                 Expanded(
                                   flex: 2,
-                                  child: GoodBox(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.pets,
-                                              color: kOrange,
-                                              size: 70,
-                                            ),
-                                            Text(
-                                              'Repos',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
-                                            ),
-                                            Text(
-                                              '540',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return Technical();
+                                          },
                                         ),
-                                        SizedBox(
-                                          child: VerticalDivider(
-                                            color: Color(0xFF7C858D),
+                                      );
+                                    },
+                                    child: GoodBox(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.pets,
+                                                color: kOrange,
+                                                size: 70,
+                                              ),
+                                              Text(
+                                                'Repos',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                              Text(
+                                                '540',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 25,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
                                           ),
-                                          height: 70,
-                                        ),
-                                        Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.language,
-                                              color: kOrange,
-                                              size: 70,
+                                          SizedBox(
+                                            child: VerticalDivider(
+                                              color: Color(0xFF7C858D),
                                             ),
-                                            Text(
-                                              'Languages',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
-                                            ),
-                                            Text(
-                                              '3',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
-                                        ),
-                                      ],
+                                            height: 70,
+                                          ),
+                                          Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.language,
+                                                color: kOrange,
+                                                size: 70,
+                                              ),
+                                              Text(
+                                                'Languages',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                              Text(
+                                                '3',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 25,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -310,16 +354,25 @@ class _RepoPageState extends State<RepoPage>
                                           CrossAxisAlignment.stretch,
                                       children: <Widget>[
                                         Expanded(
-                                          child: GoodBox(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                CircleAvatar(
-                                                  backgroundImage: NetworkImage(
-                                                      'https://avatars0.githubusercontent.com/u/47293749?v=4'),
-                                                  radius: 25,
-                                                )
-                                              ],
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return Organizations();
+                                              }));
+                                            },
+                                            child: GoodBox(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  CircleAvatar(
+                                                    backgroundImage: NetworkImage(
+                                                        'https://avatars0.githubusercontent.com/u/47293749?v=4'),
+                                                    radius: 25,
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -327,16 +380,25 @@ class _RepoPageState extends State<RepoPage>
                                           height: 15,
                                         ),
                                         Expanded(
-                                          child: GoodBox(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                CircleAvatar(
-                                                  backgroundImage: NetworkImage(
-                                                      'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/ubuntu/ubuntu.png'),
-                                                  radius: 25,
-                                                )
-                                              ],
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return Organizations();
+                                              }));
+                                            },
+                                            child: GoodBox(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  CircleAvatar(
+                                                    backgroundImage: NetworkImage(
+                                                        'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/ubuntu/ubuntu.png'),
+                                                    radius: 25,
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),

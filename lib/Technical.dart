@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gitoo/Constants.dart';
 
-class Social extends StatefulWidget {
+class Technical extends StatefulWidget {
   @override
-  _SocialState createState() => _SocialState();
+  _TechnicalState createState() => _TechnicalState();
 }
 
-class _SocialState extends State<Social> {
+class _TechnicalState extends State<Technical> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -15,14 +15,14 @@ class _SocialState extends State<Social> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: kPrimary,
-            title: Text('Bhai ka Social Circle '),
+            title: Text('Bhai ka Technical Background '),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
-                  text: 'Followers',
+                  text: 'Repos',
                 ),
                 Tab(
-                  text: 'Following',
+                  text: 'Languages',
                 ),
               ],
             ),
@@ -43,7 +43,7 @@ class One extends StatelessWidget {
       alignment: Alignment.center,
       color: kSecondary,
       child: Text(
-        'Bhai ko koi Follow nahi karta',
+        'Bhai ne abhi tak kuch nahi banaya hai',
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -57,7 +57,7 @@ class Two extends StatelessWidget {
       color: kSecondary,
       alignment: Alignment.center,
       child: Text(
-        'Bhai bhi kisi ko Follow nahi karta',
+        'Bhai abhi learning phase mein hai',
         style: TextStyle(color: Colors.white),
       ),
     );
