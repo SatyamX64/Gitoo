@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gitoo/SplashScreen.dart';
+import 'package:gitoo/Screens/SplashScreen.dart';
 import 'package:audioplayers/audio_cache.dart';
 
 class WelcomeScreen extends StatefulWidget {

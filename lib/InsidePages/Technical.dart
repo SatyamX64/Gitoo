@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gitoo/Constants.dart';
+import 'package:gitoo/Common_Resources/Constants.dart';
 
 List<String> repos = [];
 List<String> languages = [];
@@ -17,8 +17,12 @@ class _TechnicalState extends State<Technical> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            leading: kBackButton(context),
             backgroundColor: kPrimary,
-            title: Text('Bhai ka Technical Background '),
+            title: Text(
+              'Bhai ka Technical Background ',
+              style: kInsideHeading,
+            ),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -52,7 +56,7 @@ class Repos extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 '${repos[index]}',
-                style: kInsideHeading,
+                style: kInsideText,
               ));
         },
         separatorBuilder: (BuildContext context, index) {
@@ -66,7 +70,7 @@ class Repos extends StatelessWidget {
       return Center(
         child: Text(
           'Bhai ne abhi tak kuch nahi banaya hai',
-          style: kInsideHeading,
+          style: kInsideText,
         ),
       );
     }
@@ -83,7 +87,7 @@ class Languages extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 '${languages[index]}',
-                style: kInsideHeading,
+                style: kInsideText,
               ));
         },
         separatorBuilder: (BuildContext context, index) {
@@ -97,7 +101,7 @@ class Languages extends StatelessWidget {
       return Center(
         child: Text(
           'Bhai abhi learning phase mein hai',
-          style: kInsideHeading,
+          style: kInsideText,
         ),
       );
     }

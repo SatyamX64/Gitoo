@@ -3,25 +3,37 @@ import 'Constants.dart';
 
 class BottomBarButton extends StatelessWidget {
   final IconData icon;
-  BottomBarButton({this.icon});
+  final Widget page;
+  BottomBarButton({this.icon, this.page});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 5),
-      width: 80,
-      height: 80,
-      decoration: BoxDecoration(
-        color: kPrimary,
-        boxShadow: [
-          BoxShadow(color: kLPrimary, offset: Offset(-2, -2), blurRadius: 8),
-          BoxShadow(color: kDPrimary, offset: Offset(4, 4), blurRadius: 10)
-        ],
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Icon(
-        icon,
-        color: kNeon,
-        size: 40,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            PageRouteBuilder(
+                transitionDuration: Duration(seconds: 2),
+                pageBuilder: (_, __, context) {
+                  return page;
+                }));
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 5),
+        width: 80,
+        height: 80,
+        decoration: BoxDecoration(
+          color: kPrimary,
+          boxShadow: [
+            BoxShadow(color: kLPrimary, offset: Offset(-2, -2), blurRadius: 8),
+            BoxShadow(color: kDPrimary, offset: Offset(4, 4), blurRadius: 10)
+          ],
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Icon(
+          icon,
+          color: kNeon,
+          size: 40,
+        ),
       ),
     );
   }

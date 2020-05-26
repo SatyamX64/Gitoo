@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gitoo/Constants.dart';
+import 'package:gitoo/Common_Resources/Constants.dart';
 
 List<String> followers = [];
 List<String> following = [];
@@ -17,8 +17,12 @@ class _SocialState extends State<Social> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            leading: kBackButton(context),
             backgroundColor: kPrimary,
-            title: Text('Bhai ka Social Circle ',style: ,),
+            title: Text(
+              'Bhai ka Social Circle ',
+              style: kInsideHeading,
+            ),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -52,7 +56,7 @@ class Followers extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 '${followers[index]}',
-                style: kInsideHeading,
+                style: kInsideText,
               ));
         },
         separatorBuilder: (BuildContext context, index) {
@@ -66,7 +70,7 @@ class Followers extends StatelessWidget {
       return Center(
         child: Text(
           'Bhai ko koi Follow Nahi karta',
-          style: kInsideHeading,
+          style: kInsideText,
         ),
       );
     }
@@ -83,7 +87,7 @@ class Following extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Text(
                 '${following[index]}',
-                style: kInsideHeading,
+                style: kInsideText,
               ));
         },
         separatorBuilder: (BuildContext context, index) {
@@ -97,7 +101,7 @@ class Following extends StatelessWidget {
       return Center(
         child: Text(
           'Bhai bhi kisi ko Follow Nahi karta',
-          style: kInsideHeading,
+          style: kInsideText,
         ),
       );
     }

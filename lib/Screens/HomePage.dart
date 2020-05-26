@@ -1,13 +1,14 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gitoo/Organizations.dart';
-import 'package:gitoo/Shared_Widgets.dart';
-import 'package:gitoo/Social.dart';
-import 'Constants.dart';
-import 'Starred.dart';
-import 'Technical.dart';
+import 'package:gitoo/InsidePages/Organizations.dart';
+import 'package:gitoo/Common_Resources/Shared_Widgets.dart';
+import 'package:gitoo/InsidePages/Social.dart';
+import 'package:gitoo/Screens/SplashScreen.dart';
+import '../Common_Resources/Constants.dart';
+import '../InsidePages/Starred.dart';
+import '../InsidePages/Technical.dart';
+import 'About.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -40,12 +41,14 @@ class _HomePageState extends State<HomePage>
             BottomNavigationBarItem(
               icon: BottomBarButton(
                 icon: Icons.graphic_eq,
+                page: SplashScreen(),
               ),
               title: Visibility(visible: false, child: Text('')),
             ),
             BottomNavigationBarItem(
               icon: BottomBarButton(
                 icon: Icons.info,
+                page: About(),
               ),
               title: Visibility(visible: false, child: Text('')),
             ),
@@ -68,11 +71,7 @@ class _HomePageState extends State<HomePage>
                       fit: BoxFit.scaleDown,
                       child: Text(
                         'SatyamX64',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: kTinder,
-                        ),
+                        style: kUserNameStyle,
                       ),
                     ),
                   ),
@@ -86,37 +85,14 @@ class _HomePageState extends State<HomePage>
                     child: Column(
                       children: <Widget>[
                         Expanded(
-                          flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(
-                              left: 150,
-                              bottom: 15,
-                            ),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF243441),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(-2, -2),
-                                    blurRadius: 5,
-                                    color: Color(0xFF414d56),
-                                  ),
-                                  BoxShadow(
-                                    offset: Offset(4, 4),
-                                    color: Color(0xFF1A252E),
-                                    blurRadius: 10,
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(2)),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 3),
+                            margin: EdgeInsets.only(left: 120, bottom: 10),
+                            child: GoodBox(
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
                                   'sgshubham98@github.com.io',
-                                  style: TextStyle(
-                                      color: kGreen,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15),
+                                  style: kEmailStyle,
                                 ),
                               ),
                             ),
@@ -156,19 +132,11 @@ class _HomePageState extends State<HomePage>
                                                 ),
                                                 Text(
                                                   'Followers',
-                                                  style: TextStyle(
-                                                      color: kRepoFont,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 20),
+                                                  style: kHomeHeading,
                                                 ),
                                                 Text(
                                                   '54',
-                                                  style: TextStyle(
-                                                      color: kRepoFont2,
-                                                      fontSize: 25,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                  style: kHomeText,
                                                 )
                                               ],
                                             ),
@@ -189,19 +157,11 @@ class _HomePageState extends State<HomePage>
                                                 ),
                                                 Text(
                                                   'Following',
-                                                  style: TextStyle(
-                                                      color: kRepoFont,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 20),
+                                                  style: kHomeHeading,
                                                 ),
                                                 Text(
                                                   '32',
-                                                  style: TextStyle(
-                                                      color: kRepoFont2,
-                                                      fontSize: 25,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                  style: kHomeText,
                                                 )
                                               ],
                                             ),
@@ -236,17 +196,11 @@ class _HomePageState extends State<HomePage>
                                           ),
                                           Text(
                                             'Starred',
-                                            style: TextStyle(
-                                                color: kRepoFont,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20),
+                                            style: kHomeHeading,
                                           ),
                                           Text(
                                             '54',
-                                            style: TextStyle(
-                                                color: kRepoFont2,
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.bold),
+                                            style: kHomeText,
                                           )
                                         ],
                                       ),
@@ -290,18 +244,11 @@ class _HomePageState extends State<HomePage>
                                               ),
                                               Text(
                                                 'Repos',
-                                                style: TextStyle(
-                                                    color: kRepoFont,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
+                                                style: kHomeHeading,
                                               ),
                                               Text(
                                                 '540',
-                                                style: TextStyle(
-                                                    color: kRepoFont2,
-                                                    fontSize: 25,
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                style: kHomeText,
                                               )
                                             ],
                                           ),
@@ -320,18 +267,11 @@ class _HomePageState extends State<HomePage>
                                               ),
                                               Text(
                                                 'Languages',
-                                                style: TextStyle(
-                                                    color: kRepoFont,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
+                                                style: kHomeHeading,
                                               ),
                                               Text(
                                                 '3',
-                                                style: TextStyle(
-                                                    color: kRepoFont2,
-                                                    fontSize: 25,
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                style: kHomeText,
                                               )
                                             ],
                                           ),
@@ -417,10 +357,7 @@ class _HomePageState extends State<HomePage>
                                   Expanded(
                                     child: Text(
                                       'DSC||COMPETITIVE CODER||DEMO',
-                                      style: TextStyle(
-                                          color: kRepoFont,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                      style: kInfoStyle,
                                     ),
                                   ),
                                 ],
@@ -455,10 +392,18 @@ class _HomePageState extends State<HomePage>
             Positioned(
               top: 20,
               right: 10,
-              child: Text(
-                'Gitoo',
-                style: TextStyle(
-                    color: kNeon, fontSize: 50, fontWeight: FontWeight.w900),
+              child: Hero(
+                tag: 'gitoo',
+                child: Material(
+                  color: Colors.transparent,
+                  child: Text(
+                    'Gitoo',
+                    style: TextStyle(
+                        color: kNeon,
+                        fontSize: 50,
+                        fontWeight: FontWeight.w900),
+                  ),
+                ),
               ),
             ),
           ],

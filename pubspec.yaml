@@ -28,6 +28,7 @@ dependencies:
   audioplayers: ^0.15.1
   font_awesome_flutter: ^8.8.1
   http: ^0.12.1
+  flare_flutter: ^2.0.3
 
 
 dev_dependencies:

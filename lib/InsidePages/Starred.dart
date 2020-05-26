@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gitoo/Constants.dart';
+import 'package:gitoo/Common_Resources/Constants.dart';
 
 List<String> starred = [
 //  'Andi',
@@ -13,7 +13,11 @@ class Starred extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Starred'),
+          leading: kBackButton(context),
+          title: Text(
+            'Starred',
+            style: kInsideHeading,
+          ),
           backgroundColor: kPrimary,
         ),
         body: Container(
@@ -31,7 +35,7 @@ Widget getList() {
         itemBuilder: (BuildContext context, index) {
           return Text(
             '${starred[index]}',
-            style: kInsideHeading,
+            style: kInsideText,
           );
         },
         separatorBuilder: (BuildContext context, index) {
@@ -44,7 +48,7 @@ Widget getList() {
     return Center(
       child: Text(
         'Bhai ko kisi ka kaam acha nahi lagta',
-        style: kInsideHeading,
+        style: kInsideText,
       ),
     );
   }
