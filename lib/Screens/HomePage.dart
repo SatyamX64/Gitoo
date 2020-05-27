@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttericon/brandico_icons.dart';
+import 'package:fluttericon/elusive_icons.dart';
+import 'package:fluttericon/entypo_icons.dart';
+import 'package:fluttericon/fontelico_icons.dart';
+import 'package:fluttericon/iconic_icons.dart';
+import 'package:fluttericon/maki_icons.dart';
+import 'package:fluttericon/mfg_labs_icons.dart';
+import 'package:fluttericon/modern_pictograms_icons.dart';
+import 'package:fluttericon/rpg_awesome_icons.dart';
+import 'package:fluttericon/web_symbols_icons.dart';
+import 'package:fluttericon/zocial_icons.dart';
 import 'package:gitoo/InsidePages/Organizations.dart';
 import 'package:gitoo/Common_Resources/Shared_Widgets.dart';
 import 'package:gitoo/InsidePages/Social.dart';
 import 'package:gitoo/Network/Network.dart';
 import 'package:gitoo/Screens/SplashScreen.dart';
+import 'package:gitoo/Screens/WelcomeScreen.dart';
+import 'package:marquee/marquee.dart';
 import '../Common_Resources/Constants.dart';
 import '../InsidePages/Starred.dart';
 import '../InsidePages/Technical.dart';
@@ -39,6 +52,9 @@ class _HomePageState extends State<HomePage>
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) {
+            setState(() {});
+          },
           backgroundColor: kPrimary,
           items: [
             BottomNavigationBarItem(
@@ -82,7 +98,7 @@ class _HomePageState extends State<HomePage>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        '$name',
+                        '${name ?? 'Not Available'}',
                         style: kUserNameStyle,
                       ),
                     ),
@@ -103,7 +119,7 @@ class _HomePageState extends State<HomePage>
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
-                                  '$email',
+                                  '${email ?? 'Not Available'}',
                                   style: kEmailStyle,
                                 ),
                               ),
@@ -113,184 +129,54 @@ class _HomePageState extends State<HomePage>
                         Expanded(
                           flex: 4,
                           child: Container(
-                            padding: EdgeInsets.only(bottom: 15),
                             child: Row(
                               children: <Widget>[
-                                Expanded(
-                                  flex: 2,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return Social();
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    child: GoodBox(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              children: <Widget>[
-                                                Icon(
-                                                  Icons.group,
-                                                  color: kGreen,
-                                                  size: 70,
-                                                ),
-                                                Text(
-                                                  'Followers',
-                                                  style: kHomeHeading,
-                                                ),
-                                                Text(
-                                                  '${followers.length}',
-                                                  style: kHomeText,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            child: VerticalDivider(
-                                              color: Color(0xFF7C858D),
-                                            ),
-                                            height: 70,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              children: <Widget>[
-                                                Icon(
-                                                  Icons.directions_run,
-                                                  color: kGreen,
-                                                  size: 70,
-                                                ),
-                                                Text(
-                                                  'Following',
-                                                  style: kHomeHeading,
-                                                ),
-                                                Text(
-                                                  '${following.length}',
-                                                  style: kHomeText,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                SweetBox(
+                                  data: followers,
+                                  title: 'Followers',
+                                  icon: MfgLabs.users,
+                                  iconColor: kGreen,
+                                  page: Social(),
                                 ),
                                 SizedBox(
                                   width: 15,
                                 ),
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return Starred();
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    child: GoodBox(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.star,
-                                            color: kYellow,
-                                            size: 70,
-                                          ),
-                                          Text(
-                                            'Starred',
-                                            style: kHomeHeading,
-                                          ),
-                                          Text(
-                                            '${starred.length}',
-                                            style: kHomeText,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                SweetBox(
+                                  data: following,
+                                  title: 'Following',
+                                  icon: Elusive.group,
+                                  iconColor: kGreen,
+                                  page: Social(),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                SweetBox(
+                                  data: starred,
+                                  title: 'Starred',
+                                  icon: Icons.star,
+                                  iconColor: kYellow,
+                                  page: Starred(),
                                 ),
                               ],
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Expanded(
                           flex: 4,
                           child: Container(
-                            padding: EdgeInsets.only(bottom: 10),
                             child: Row(
                               children: <Widget>[
-                                Expanded(
+                                SweetBox(
                                   flex: 2,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return Technical();
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    child: GoodBox(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Column(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.pets,
-                                                color: kOrange,
-                                                size: 70,
-                                              ),
-                                              Text(
-                                                'Repos',
-                                                style: kHomeHeading,
-                                              ),
-                                              Text(
-                                                '${repos.length}',
-                                                style: kHomeText,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            child: VerticalDivider(
-                                              color: Color(0xFF7C858D),
-                                            ),
-                                            height: 70,
-                                          ),
-                                          Column(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.language,
-                                                color: kOrange,
-                                                size: 70,
-                                              ),
-                                              Text(
-                                                'Languages',
-                                                style: kHomeHeading,
-                                              ),
-                                              Text(
-                                                '3',
-                                                style: kHomeText,
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  title: 'Repos',
+                                  iconColor: kYellow,
+                                  icon: RpgAwesome.player_pyromaniac,
+                                  data: repos,
+                                  page: Technical(),
                                 ),
                                 SizedBox(
                                   width: 15,
@@ -301,54 +187,25 @@ class _HomePageState extends State<HomePage>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.stretch,
                                       children: <Widget>[
-                                        Expanded(
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                return Organizations();
-                                              }));
-                                            },
-                                            child: GoodBox(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  CircleAvatar(
-                                                    backgroundImage: NetworkImage(
-                                                        'https://avatars0.githubusercontent.com/u/47293749?v=4'),
-                                                    radius: 25,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
+                                        SweetBox(
+                                          title: 'Orgs',
+                                          iconColor: kTinder,
+                                          icon: Elusive.heart,
+                                          page: Organizations(),
+                                          data: organizations,
+                                          vNumber: false,
+                                          vTitle: false,
                                         ),
                                         SizedBox(
                                           height: 15,
                                         ),
-                                        Expanded(
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                return Organizations();
-                                              }));
-                                            },
-                                            child: GoodBox(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  CircleAvatar(
-                                                    backgroundImage: NetworkImage(
-                                                        'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/ubuntu/ubuntu.png'),
-                                                    radius: 25,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
+                                        SweetBox(
+                                          iconColor: kTinder,
+                                          icon: Maki.town_hall,
+                                          page: Organizations(),
+                                          data: organizations,
+                                          vTitle: false,
+                                          vNumber: false,
                                         ),
                                       ],
                                     ),
@@ -358,19 +215,24 @@ class _HomePageState extends State<HomePage>
                             ),
                           ),
                         ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            margin: EdgeInsets.only(top: 5),
-                            child: GoodBox(
-                              child: Text(
-                                '$info',
-                                style: kInfoStyle,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
+
+//                        SizedBox(
+//                          height: 15,
+//                        ),
+
+//                        Expanded(
+//                          flex: 2,
+//                          child: Container(
+//                            margin: EdgeInsets.only(top: 5),
+//                            child: GoodBox(
+//                              child: Text(
+//                                '$info',
+//                                style: kInfoStyle,
+//                                textAlign: TextAlign.center,
+//                              ),
+//                            ),
+//                          ),
+//                        ),
                       ],
                     ),
                   ),
@@ -383,7 +245,7 @@ class _HomePageState extends State<HomePage>
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: [
-                    BoxShadow(color: kNeon, spreadRadius: 5),
+                    BoxShadow(color: kNeon, blurRadius: 15, spreadRadius: 5),
                   ],
                   shape: BoxShape.circle,
                 ),

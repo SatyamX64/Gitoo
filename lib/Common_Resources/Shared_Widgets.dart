@@ -67,3 +67,85 @@ class GoodBox extends StatelessWidget {
     );
   }
 }
+
+class SweetBox extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final Color iconColor;
+  final Widget page;
+  final List data;
+  final int flex;
+  final bool vIcon;
+  final bool vTitle;
+  final bool vNumber;
+  SweetBox(
+      {this.vIcon,
+      this.vNumber,
+      this.vTitle,
+      this.data,
+      this.title,
+      this.icon,
+      this.iconColor,
+      this.page,
+      this.flex});
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: flex ?? 1,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return page;
+              },
+            ),
+          );
+        },
+        child: GoodBox(
+          child: Column(
+            children: <Widget>[
+              Visibility(
+                visible: vIcon ?? true,
+                child: Expanded(
+                  flex: 3,
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Icon(
+                      icon,
+                      color: iconColor,
+                    ),
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: vTitle ?? true,
+                child: Expanded(
+                  child: FittedBox(
+                    child: Text(
+                      '$title',
+                      style: kHomeHeading,
+                    ),
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: vNumber ?? true,
+                child: Expanded(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '${data.length}',
+                      style: kHomeText,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
