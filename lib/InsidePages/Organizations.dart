@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gitoo/Common_Resources/Constants.dart';
 
-List<String> organizations = [
-//  'Andi',
-//  'Bandi',
-//  'Sandi',
-];
+List<String> organizations = [];
 
 class Organizations extends StatelessWidget {
   @override

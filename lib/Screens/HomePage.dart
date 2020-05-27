@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:gitoo/InsidePages/Organizations.dart';
 import 'package:gitoo/Common_Resources/Shared_Widgets.dart';
 import 'package:gitoo/InsidePages/Social.dart';
+import 'package:gitoo/Network/Network.dart';
 import 'package:gitoo/Screens/SplashScreen.dart';
 import '../Common_Resources/Constants.dart';
 import '../InsidePages/Starred.dart';
@@ -11,15 +12,26 @@ import '../InsidePages/Technical.dart';
 import 'About.dart';
 
 class HomePage extends StatefulWidget {
+  final String username;
+  HomePage({this.username});
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  NetworkLoader networkLoader;
   @override
   void initState() {
     super.initState();
+    networkLoader = NetworkLoader(username: widget.username);
+    loadData();
+  }
+
+  void loadData() async {
+    await networkLoader.getData();
+    setState(() {});
+    return;
   }
 
   @override
@@ -62,7 +74,7 @@ class _HomePageState extends State<HomePage>
                   flex: 3,
                   child: Container(
                     alignment: Alignment.bottomRight,
-                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    padding: EdgeInsets.only(left: 150, right: 5),
                     width: double.maxFinite,
                     decoration: BoxDecoration(
                       color: kPrimary,
@@ -70,7 +82,7 @@ class _HomePageState extends State<HomePage>
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'SatyamX64',
+                        '$name',
                         style: kUserNameStyle,
                       ),
                     ),
@@ -91,7 +103,7 @@ class _HomePageState extends State<HomePage>
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
-                                  'sgshubham98@github.com.io',
+                                  '$email',
                                   style: kEmailStyle,
                                 ),
                               ),
@@ -135,7 +147,7 @@ class _HomePageState extends State<HomePage>
                                                   style: kHomeHeading,
                                                 ),
                                                 Text(
-                                                  '54',
+                                                  '${followers.length}',
                                                   style: kHomeText,
                                                 )
                                               ],
@@ -160,7 +172,7 @@ class _HomePageState extends State<HomePage>
                                                   style: kHomeHeading,
                                                 ),
                                                 Text(
-                                                  '32',
+                                                  '${following.length}',
                                                   style: kHomeText,
                                                 )
                                               ],
@@ -199,7 +211,7 @@ class _HomePageState extends State<HomePage>
                                             style: kHomeHeading,
                                           ),
                                           Text(
-                                            '54',
+                                            '${starred.length}',
                                             style: kHomeText,
                                           )
                                         ],
@@ -247,7 +259,7 @@ class _HomePageState extends State<HomePage>
                                                 style: kHomeHeading,
                                               ),
                                               Text(
-                                                '540',
+                                                '${repos.length}',
                                                 style: kHomeText,
                                               )
                                             ],
@@ -351,16 +363,10 @@ class _HomePageState extends State<HomePage>
                           child: Container(
                             margin: EdgeInsets.only(top: 5),
                             child: GoodBox(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Text(
-                                      'DSC||COMPETITIVE CODER||DEMO',
-                                      style: kInfoStyle,
-                                    ),
-                                  ),
-                                ],
+                              child: Text(
+                                '$info',
+                                style: kInfoStyle,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),
@@ -383,9 +389,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 child: CircleAvatar(
                   radius: 60,
-                  backgroundColor: kSecondary,
-                  backgroundImage: NetworkImage(
-                      'https://avatars0.githubusercontent.com/u/62766656?v=4'),
+                  backgroundImage: NetworkImage('$avatar'),
                 ),
               ),
             ),

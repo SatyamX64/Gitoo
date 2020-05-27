@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gitoo/Common_Resources/Constants.dart';
 
-List<String> starred = [
-//  'Andi',
-//  'Bandi',
-//  'Sandi',
-];
+List<String> starred = [];
 
 class Starred extends StatelessWidget {
   @override

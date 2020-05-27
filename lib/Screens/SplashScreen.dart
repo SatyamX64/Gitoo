@@ -106,7 +106,9 @@ class _SplashScreenState extends State<SplashScreen> {
                         PageRouteBuilder(
                             transitionDuration: Duration(seconds: 2),
                             pageBuilder: (_, __, context) {
-                              return HomePage();
+                              return HomePage(
+                                username: userController.text,
+                              );
                             }));
                   },
                   child: Container(
