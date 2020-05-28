@@ -12,9 +12,7 @@ import 'package:gitoo/InsidePages/Followers.dart';
 import 'package:gitoo/InsidePages/Saved_Users.dart';
 import 'package:gitoo/Network/Network.dart';
 import 'package:gitoo/Screens/SplashScreen.dart';
-import 'package:gitoo/Screens/WelcomeScreen.dart';
 import 'package:marquee/marquee.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../Common_Resources/Constants.dart';
 import '../InsidePages/Starred.dart';
 import 'package:gitoo/InsidePages/Repos.dart';
@@ -269,8 +267,7 @@ class _MenuState extends State<Menu> {
               color: Colors.transparent,
               child: Text(
                 'Gitoo',
-                style: TextStyle(
-                    color: kNeon, fontSize: 50, fontWeight: FontWeight.w900),
+                style: kGitooTheme,
               ),
             ),
           ),

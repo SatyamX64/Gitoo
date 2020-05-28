@@ -21,29 +21,43 @@ Color kInsideHeadingColor = kNeon;
 Color kHomeHeadingFont = kNeon;
 Color kHomeTextFont = Colors.white;
 
+TextStyle kGitooTheme =
+    TextStyle(color: kNeon, fontSize: 50, fontWeight: FontWeight.w900);
+
 TextStyle kInsideText = TextStyle(
   color: kInsideFontColor,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Balsamiq',
   fontSize: 15,
 );
 TextStyle kInsideHeading = TextStyle(
   color: kInsideHeadingColor,
   fontWeight: FontWeight.bold,
+  fontFamily: 'Balsamiq',
   fontSize: 20,
 );
-TextStyle kHomeText =
-    TextStyle(color: kHomeTextFont, fontSize: 25, fontWeight: FontWeight.bold);
+TextStyle kHomeText = TextStyle(
+    color: kHomeTextFont,
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Balsamiq');
 TextStyle kHomeHeading = TextStyle(
     color: kHomeHeadingFont, fontWeight: FontWeight.bold, fontSize: 20);
 TextStyle kUserNameStyle = TextStyle(
-  fontSize: 30,
-  fontWeight: FontWeight.bold,
-  color: kTinder,
-);
-TextStyle kEmailStyle =
-    TextStyle(color: kGreen, fontWeight: FontWeight.bold, fontSize: 15);
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+    color: kTinder,
+    fontFamily: 'Balsamiq');
+TextStyle kEmailStyle = TextStyle(
+    color: kGreen,
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
+    fontFamily: 'Balsamiq');
 TextStyle kInfoStyle = TextStyle(
-    color: kHomeHeadingFont, fontSize: 20, fontWeight: FontWeight.bold);
+    color: kHomeHeadingFont,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Balsamiq');
 
 Function kBackButton = (BuildContext context) {
   return GestureDetector(

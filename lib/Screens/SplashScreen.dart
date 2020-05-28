@@ -1,9 +1,7 @@
 import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gitoo/Common_Resources/Constants.dart';
 import 'package:gitoo/Network/Network.dart';
@@ -80,6 +78,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: TextField(
                     controller: userController,
                     focusNode: userFocusNode,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Balsamiq',
+                      fontWeight: FontWeight.w700,
+                    ),
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       filled: true,
