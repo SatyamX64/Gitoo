@@ -149,3 +149,48 @@ class SweetBox extends StatelessWidget {
     );
   }
 }
+
+class InsidePage extends StatelessWidget {
+  final Widget getList;
+  final String title;
+  InsidePage({this.title, this.getList});
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: kPrimary,
+          body: Stack(
+            children: <Widget>[
+              Container(
+                margin:
+                    EdgeInsets.only(top: 70, left: 10, right: 10, bottom: 20),
+                child: GoodBox(
+                  child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      child: getList),
+                ),
+              ),
+              Positioned(
+                top: 35,
+                width: 150,
+                left: MediaQuery.of(context).size.width / 2 - 75,
+                child: Container(
+                  child: GoodBox(
+                    child: Center(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          '$title',
+                          style: kInfoStyle.copyWith(fontSize: 35),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+}

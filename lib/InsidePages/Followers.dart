@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:gitoo/Common_Resources/Constants.dart';
 import 'package:gitoo/Common_Resources/Shared_Widgets.dart';
 
-List<String> organizations = [];
+List<String> followers = [];
 
-class Organizations extends StatelessWidget {
+class Followers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: InsidePage(
         getList: getList(),
-        title: 'Organizations',
+        title: 'Followers',
       ),
     );
   }
 }
 
 Widget getList() {
-  if (organizations.isNotEmpty) {
+  if (followers.isNotEmpty) {
     return ListView.separated(
         itemBuilder: (BuildContext context, index) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 5),
             child: Text(
-              '${organizations[index]}',
+              '${followers[index]}',
               style: kInsideText.copyWith(fontWeight: FontWeight.normal),
             ),
           );
@@ -33,11 +33,11 @@ Widget getList() {
             color: kLPrimary,
           );
         },
-        itemCount: organizations.length);
+        itemCount: followers.length);
   } else {
     return Center(
       child: Text(
-        'Bhai ko kahi kaam nahi mila',
+        'Bhai ko koi Follow nahi karta',
         style: kInsideText,
       ),
     );

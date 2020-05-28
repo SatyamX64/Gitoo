@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:gitoo/InsidePages/Organizations.dart';
-import 'package:gitoo/InsidePages/Social.dart';
+import 'package:gitoo/InsidePages/Followers.dart';
+import 'package:gitoo/InsidePages/Following.dart';
 import 'package:gitoo/InsidePages/Starred.dart';
-import 'package:gitoo/InsidePages/Technical.dart';
+import 'package:gitoo/InsidePages/Repos.dart';
 import 'package:http/http.dart';
 
 String name = 'Yaha Name aayega';
@@ -32,8 +33,8 @@ class NetworkLoader {
 
   Future<void> getFollowers() async {
     Response response = await get('$git$username/followers');
-    List data = jsonDecode(response.body);
     followers.clear();
+    List data = jsonDecode(response.body);
     for (int i = 0; i < data.length; i++) {
       followers.add(data[i]['login']);
     }

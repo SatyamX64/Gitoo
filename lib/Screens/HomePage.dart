@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fluttericon/brandico_icons.dart';
 import 'package:fluttericon/elusive_icons.dart';
-import 'package:fluttericon/entypo_icons.dart';
-import 'package:fluttericon/fontelico_icons.dart';
-import 'package:fluttericon/iconic_icons.dart';
 import 'package:fluttericon/maki_icons.dart';
 import 'package:fluttericon/mfg_labs_icons.dart';
-import 'package:fluttericon/modern_pictograms_icons.dart';
 import 'package:fluttericon/rpg_awesome_icons.dart';
-import 'package:fluttericon/web_symbols_icons.dart';
-import 'package:fluttericon/zocial_icons.dart';
 import 'package:gitoo/InsidePages/Organizations.dart';
 import 'package:gitoo/Common_Resources/Shared_Widgets.dart';
-import 'package:gitoo/InsidePages/Social.dart';
+import 'package:gitoo/InsidePages/Following.dart';
+import 'package:gitoo/InsidePages/Followers.dart';
+import 'package:gitoo/InsidePages/Saved_Users.dart';
 import 'package:gitoo/Network/Network.dart';
 import 'package:gitoo/Screens/SplashScreen.dart';
-import 'package:gitoo/Screens/WelcomeScreen.dart';
 import 'package:marquee/marquee.dart';
 import '../Common_Resources/Constants.dart';
 import '../InsidePages/Starred.dart';
-import '../InsidePages/Technical.dart';
+import 'package:gitoo/InsidePages/Repos.dart';
 import 'About.dart';
 
 class HomePage extends StatefulWidget {
@@ -108,7 +102,7 @@ class _HomePageState extends State<HomePage>
                   flex: 8,
                   child: Container(
                     width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    padding: EdgeInsets.only(left: 10, top: 10, right: 10),
                     decoration: BoxDecoration(color: kPrimary),
                     child: Column(
                       children: <Widget>[
@@ -136,7 +130,7 @@ class _HomePageState extends State<HomePage>
                                   title: 'Followers',
                                   icon: MfgLabs.users,
                                   iconColor: kGreen,
-                                  page: Social(),
+                                  page: Followers(),
                                 ),
                                 SizedBox(
                                   width: 15,
@@ -146,7 +140,7 @@ class _HomePageState extends State<HomePage>
                                   title: 'Following',
                                   icon: Elusive.group,
                                   iconColor: kGreen,
-                                  page: Social(),
+                                  page: Following(),
                                 ),
                                 SizedBox(
                                   width: 15,
@@ -176,7 +170,7 @@ class _HomePageState extends State<HomePage>
                                   iconColor: kYellow,
                                   icon: RpgAwesome.player_pyromaniac,
                                   data: repos,
-                                  page: Technical(),
+                                  page: Repos(),
                                 ),
                                 SizedBox(
                                   width: 15,
@@ -191,7 +185,7 @@ class _HomePageState extends State<HomePage>
                                           title: 'Orgs',
                                           iconColor: kTinder,
                                           icon: Elusive.heart,
-                                          page: Organizations(),
+                                          page: SavedUsers(),
                                           data: organizations,
                                           vNumber: false,
                                           vTitle: false,
@@ -215,8 +209,28 @@ class _HomePageState extends State<HomePage>
                             ),
                           ),
                         ),
-
-//                        SizedBox(
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Expanded(
+                            child: Container(
+                          alignment: Alignment.center,
+                          child: Marquee(
+                            text: '${info ?? 'Bio Not Available'}',
+                            style: kInfoStyle,
+                            scrollAxis: Axis.horizontal,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            blankSpace: 20.0,
+                            velocity: 100.0,
+                            pauseAfterRound: Duration(seconds: 0),
+                            startPadding: 10,
+                            accelerationDuration: Duration(seconds: 1),
+                            accelerationCurve: Curves.linear,
+                            decelerationDuration: Duration(milliseconds: 500),
+                            decelerationCurve: Curves.easeOut,
+                          ),
+                        ))
+                        //                        SizedBox(
 //                          height: 15,
 //                        ),
 
@@ -251,6 +265,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 child: CircleAvatar(
                   radius: 60,
+                  backgroundColor: kSecondary,
                   backgroundImage: NetworkImage('$avatar'),
                 ),
               ),
