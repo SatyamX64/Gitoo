@@ -6,16 +6,24 @@ import 'package:gitoo/InsidePages/Starred.dart';
 import 'package:gitoo/InsidePages/Repos.dart';
 import 'package:http/http.dart';
 
-String name = 'Yaha Name aayega';
-String email = 'Yaha Email aayegi';
-String avatar =
-    'https://www.punjabigram.com/pg/ajay_devgan/ajay_devgan_wearing_black_goggle.jpg';
-String info = 'Do shabd by User';
+String name;
+String email;
+String avatar;
+String info;
 
 class NetworkLoader {
   String username;
   NetworkLoader({this.username});
   String git = 'https://api.github.com/users/';
+  Future<bool> checkUsername() async {
+    Response response = await get('$git$username');
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return true;
+    } else
+      return false;
+  }
+
   Future<void> getData() async {
     Response response = await get('$git$username');
     Map data = jsonDecode(response.body);
