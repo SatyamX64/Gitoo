@@ -14,6 +14,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool loading = false;
+  bool isFocus = false;
   final audioCache = AudioCache();
   String animationType = 'idle';
   FocusNode userFocusNode = FocusNode();
@@ -24,10 +25,12 @@ class _SplashScreenState extends State<SplashScreen> {
     userFocusNode.addListener(() {
       if (userFocusNode.hasFocus) {
         setState(() {
+          isFocus = true;
           animationType = "test";
         });
       } else {
         setState(() {
+          isFocus = false;
           animationType = "idle";
         });
       }
@@ -73,6 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Expanded(
                 flex: 2,
                 child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   alignment: Alignment.topCenter,
                   color: kPrimary,
                   child: TextField(
@@ -167,20 +171,23 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                color: kPrimary,
-                child: Hero(
-                  tag: 'gitoo',
-                  child: Material(
-                    color: Colors.transparent,
-                    child: Text(
-                      'Gitoo',
-                      style: TextStyle(
-                          color: kNeon,
-                          fontSize: 50,
-                          fontWeight: FontWeight.w900),
+            Visibility(
+              visible: !isFocus,
+              child: Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  color: kPrimary,
+                  child: Hero(
+                    tag: 'gitoo',
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Text(
+                        'Gitoo',
+                        style: TextStyle(
+                            color: kNeon,
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900),
+                      ),
                     ),
                   ),
                 ),

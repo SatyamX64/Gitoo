@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Constants.dart';
+import 'package:gitoo/Screens/HomePage.dart';
 
 class BottomBarButton extends StatelessWidget {
   final IconData icon;
@@ -60,73 +61,51 @@ class SweetBox extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color iconColor;
-  final Widget page;
-  final List data;
+  final Widget function;
   final int flex;
-  final bool vIcon;
-  final bool vTitle;
-  final bool vNumber;
+  final List data;
   SweetBox(
-      {this.vIcon,
-      this.vNumber,
-      this.vTitle,
-      this.data,
+      {this.data,
       this.title,
       this.icon,
       this.iconColor,
-      this.page,
-      this.flex});
+      this.function,
+      this.flex = 1});
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: flex ?? 1,
+      flex: flex,
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return page;
-              },
-            ),
-          );
+          selectedList = function;
         },
         child: GoodBox(
           child: Column(
             children: <Widget>[
-              Visibility(
-                visible: vIcon ?? true,
-                child: Expanded(
-                  flex: 3,
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: Icon(
-                      icon,
-                      color: iconColor,
-                    ),
+              Expanded(
+                flex: 3,
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: Icon(
+                    icon,
+                    color: iconColor,
                   ),
                 ),
               ),
-              Visibility(
-                visible: vTitle ?? true,
-                child: Expanded(
-                  child: FittedBox(
-                    child: Text(
-                      '$title',
-                      style: kHomeHeading,
-                    ),
+              Expanded(
+                child: FittedBox(
+                  child: Text(
+                    '$title',
+                    style: kHomeHeading,
                   ),
                 ),
               ),
-              Visibility(
-                visible: vNumber ?? true,
-                child: Expanded(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      '${data.length}',
-                      style: kHomeText,
-                    ),
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    '${data.length}',
+                    style: kHomeText,
                   ),
                 ),
               )
@@ -134,51 +113,6 @@ class SweetBox extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class InsidePage extends StatelessWidget {
-  final Widget getList;
-  final String title;
-  InsidePage({this.title, this.getList});
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: kPrimary,
-          body: Stack(
-            children: <Widget>[
-              Container(
-                margin:
-                    EdgeInsets.only(top: 70, left: 10, right: 10, bottom: 20),
-                child: GoodBox(
-                  child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                      child: getList),
-                ),
-              ),
-              Positioned(
-                top: 35,
-                width: 150,
-                left: MediaQuery.of(context).size.width / 2 - 75,
-                child: Container(
-                  child: GoodBox(
-                    child: Center(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          '$title',
-                          style: kInfoStyle.copyWith(fontSize: 35),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          )),
     );
   }
 }

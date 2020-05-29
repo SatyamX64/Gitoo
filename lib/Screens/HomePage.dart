@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttericon/elusive_icons.dart';
-import 'package:fluttericon/maki_icons.dart';
 import 'package:fluttericon/mfg_labs_icons.dart';
-import 'package:fluttericon/rpg_awesome_icons.dart';
-import 'package:gitoo/InsidePages/Organizations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gitoo/Common_Resources/Shared_Widgets.dart';
-import 'package:gitoo/InsidePages/Following.dart';
-import 'package:gitoo/InsidePages/Followers.dart';
-import 'package:gitoo/InsidePages/Saved_Users.dart';
+import 'package:gitoo/InsidePages/List.dart';
 import 'package:gitoo/Network/Network.dart';
 import 'package:gitoo/Screens/SplashScreen.dart';
 import 'package:marquee/marquee.dart';
 import '../Common_Resources/Constants.dart';
-import '../InsidePages/Starred.dart';
-import 'package:gitoo/InsidePages/Repos.dart';
 import 'About.dart';
+
+Widget selectedList = getFollowers();
 
 class HomePage extends StatefulWidget {
   @override
@@ -110,6 +106,7 @@ class _MenuState extends State<Menu> {
                 child: Column(
                   children: <Widget>[
                     Expanded(
+                      flex: 10,
                       child: Container(
                         margin: EdgeInsets.only(left: 120, bottom: 10),
                         child: GoodBox(
@@ -124,85 +121,81 @@ class _MenuState extends State<Menu> {
                       ),
                     ),
                     Expanded(
-                      flex: 4,
+                      flex: 20,
                       child: Container(
                         child: Row(
                           children: <Widget>[
                             SweetBox(
-                              data: followers,
                               title: 'Followers',
                               icon: MfgLabs.users,
                               iconColor: kGreen,
-                              page: Followers(),
+                              function: getFollowers(),
+                              data: followers,
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 20,
                             ),
                             SweetBox(
-                              data: following,
                               title: 'Following',
                               icon: Elusive.group,
                               iconColor: kGreen,
-                              page: Following(),
+                              function: getFollowing(),
+                              data: following,
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 20,
                             ),
                             SweetBox(
-                              data: starred,
                               title: 'Starred',
                               icon: Icons.star,
                               iconColor: kYellow,
-                              page: Starred(),
+                              function: getStarred(),
+                              data: starred,
                             ),
                           ],
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     Expanded(
-                      flex: 4,
+                      flex: 44,
                       child: Container(
                         child: Row(
                           children: <Widget>[
-                            SweetBox(
-                              flex: 2,
-                              title: 'Repos',
-                              iconColor: kYellow,
-                              icon: RpgAwesome.player_pyromaniac,
-                              data: repos,
-                              page: Repos(),
+                            Expanded(
+                              flex: 20,
+                              child: GoodBox(
+                                child: selectedList,
+                              ),
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 20,
                             ),
                             Expanded(
+                              flex: 9,
                               child: Container(
                                 child: Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: <Widget>[
                                     SweetBox(
-                                      title: 'Orgs',
-                                      iconColor: kTinder,
-                                      icon: Elusive.heart,
-                                      page: SavedUsers(),
-                                      data: organizations,
-                                      vNumber: false,
-                                      vTitle: false,
+                                      data: repos,
+                                      title: 'Repos',
+                                      iconColor: kOrange,
+                                      icon: Elusive.github,
+                                      function: getRepos(),
                                     ),
                                     SizedBox(
-                                      height: 15,
+                                      height: 20,
                                     ),
                                     SweetBox(
-                                      iconColor: kTinder,
-                                      icon: Maki.town_hall,
-                                      page: Organizations(),
                                       data: organizations,
-                                      vTitle: false,
-                                      vNumber: false,
+                                      iconColor: kOrange,
+                                      icon: FontAwesomeIcons.briefcase,
+                                      function: getOrgs(),
+                                      title: 'Orgs',
                                     ),
                                   ],
                                 ),
@@ -213,9 +206,10 @@ class _MenuState extends State<Menu> {
                       ),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     Expanded(
+                      flex: 10,
                       child: Container(
                         alignment: Alignment.center,
                         child: Marquee(

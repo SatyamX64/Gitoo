@@ -1,9 +1,5 @@
 import 'dart:convert';
-import 'package:gitoo/InsidePages/Organizations.dart';
-import 'package:gitoo/InsidePages/Followers.dart';
-import 'package:gitoo/InsidePages/Following.dart';
-import 'package:gitoo/InsidePages/Starred.dart';
-import 'package:gitoo/InsidePages/Repos.dart';
+import 'package:gitoo/InsidePages/List.dart';
 import 'package:http/http.dart';
 
 String name;
@@ -40,7 +36,7 @@ class NetworkLoader {
   }
 
   Future<void> getFollowers() async {
-    Response response = await get('$git$username/followers');
+    Response response = await get('$git$username/followers?per_page=10000');
     followers.clear();
     List data = jsonDecode(response.body);
     for (int i = 0; i < data.length; i++) {
@@ -50,7 +46,7 @@ class NetworkLoader {
   }
 
   Future<void> getFollowing() async {
-    Response response = await get('$git$username/following');
+    Response response = await get('$git$username/following?per_page=10000');
     List data = jsonDecode(response.body);
     following.clear();
     for (int i = 0; i < data.length; i++) {
@@ -60,7 +56,7 @@ class NetworkLoader {
   }
 
   Future<void> getStarred() async {
-    Response response = await get('$git$username/starred');
+    Response response = await get('$git$username/starred?per_page=10000');
     List data = jsonDecode(response.body);
     starred.clear();
     for (int i = 0; i < data.length; i++) {
@@ -70,7 +66,7 @@ class NetworkLoader {
   }
 
   Future<void> getOrganisations() async {
-    Response response = await get('$git$username/orgs');
+    Response response = await get('$git$username/orgs?per_page=1000');
     List data = jsonDecode(response.body);
     organizations.clear();
     for (int i = 0; i < data.length; i++) {
@@ -80,7 +76,7 @@ class NetworkLoader {
   }
 
   Future<void> getRepos() async {
-    Response response = await get('$git$username/repos');
+    Response response = await get('$git$username/repos?per_page=10000');
     List data = jsonDecode(response.body);
     repos.clear();
     for (int i = 0; i < data.length; i++) {
