@@ -63,9 +63,9 @@ class SweetBox extends StatelessWidget {
   final Color iconColor;
   final Function function;
   final int flex;
-  final List data;
+  final int count;
   SweetBox(
-      {this.data,
+      {this.count,
       this.title,
       this.icon,
       this.iconColor,
@@ -102,7 +102,7 @@ class SweetBox extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    '${data.length}',
+                    '$count',
                     style: kHomeText,
                   ),
                 ),

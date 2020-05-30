@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Gitoo',
       home: SafeArea(child: SplashScreen()),
       debugShowCheckedModeBanner: false,
     );

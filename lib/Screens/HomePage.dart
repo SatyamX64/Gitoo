@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttericon/brandico_icons.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/mfg_labs_icons.dart';
+import 'package:fluttericon/modern_pictograms_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gitoo/Common_Resources/Shared_Widgets.dart';
 import 'package:gitoo/InsidePages/List.dart';
@@ -29,40 +31,43 @@ class _HomePageState extends State<HomePage>
   ];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            currentIndex = index;
-            setState(() {});
-          },
-          backgroundColor: kPrimary,
-          items: [
-            BottomNavigationBarItem(
-              icon: BottomBarButton(
-                icon: Icons.home,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (index) {
+              currentIndex = index;
+              setState(() {});
+            },
+            backgroundColor: kPrimary,
+            items: [
+              BottomNavigationBarItem(
+                icon: BottomBarButton(
+                  icon: Icons.home,
+                ),
+                title: Visibility(
+                  visible: false,
+                  child: Text(' '),
+                ),
               ),
-              title: Visibility(
-                visible: false,
-                child: Text(' '),
+              BottomNavigationBarItem(
+                icon: BottomBarButton(
+                  icon: Icons.graphic_eq,
+                ),
+                title: Visibility(visible: false, child: Text('')),
               ),
-            ),
-            BottomNavigationBarItem(
-              icon: BottomBarButton(
-                icon: Icons.graphic_eq,
+              BottomNavigationBarItem(
+                icon: BottomBarButton(
+                  icon: Icons.info,
+                ),
+                title: Visibility(visible: false, child: Text('')),
               ),
-              title: Visibility(visible: false, child: Text('')),
-            ),
-            BottomNavigationBarItem(
-              icon: BottomBarButton(
-                icon: Icons.info,
-              ),
-              title: Visibility(visible: false, child: Text('')),
-            ),
-          ],
+            ],
+          ),
+          body: screens[currentIndex],
         ),
-        body: screens[currentIndex],
       ),
     );
   }
@@ -127,6 +132,7 @@ class _MenuState extends State<Menu> {
                         child: Row(
                           children: <Widget>[
                             SweetBox(
+                              count: noOfFollowers,
                               title: 'Followers',
                               icon: MfgLabs.users,
                               iconColor: kGreen,
@@ -135,13 +141,13 @@ class _MenuState extends State<Menu> {
                                   selectedList = getFollowers();
                                 });
                               },
-                              data: followers,
                             ),
                             SizedBox(
                               width: 20,
                             ),
                             SweetBox(
                               title: 'Following',
+                              count: noOfFollowing,
                               icon: Elusive.group,
                               iconColor: kGreen,
                               function: () {
@@ -149,13 +155,13 @@ class _MenuState extends State<Menu> {
                                   selectedList = getFollowing();
                                 });
                               },
-                              data: following,
                             ),
                             SizedBox(
                               width: 20,
                             ),
                             SweetBox(
                               title: 'Starred',
+                              count: starred.length,
                               icon: Icons.star,
                               iconColor: kYellow,
                               function: () {
@@ -163,7 +169,6 @@ class _MenuState extends State<Menu> {
                                   selectedList = getStarred();
                                 });
                               },
-                              data: starred,
                             ),
                           ],
                         ),
@@ -194,7 +199,7 @@ class _MenuState extends State<Menu> {
                                       CrossAxisAlignment.stretch,
                                   children: <Widget>[
                                     SweetBox(
-                                      data: repos,
+                                      count: noOfRepos,
                                       title: 'Repos',
                                       iconColor: kOrange,
                                       icon: Elusive.github,
@@ -208,9 +213,9 @@ class _MenuState extends State<Menu> {
                                       height: 20,
                                     ),
                                     SweetBox(
-                                      data: organizations,
+                                      count: organizations.length,
                                       iconColor: kOrange,
-                                      icon: FontAwesomeIcons.briefcase,
+                                      icon: ModernPictograms.money,
                                       function: () {
                                         setState(() {
                                           selectedList = getOrgs();
@@ -268,8 +273,7 @@ class _MenuState extends State<Menu> {
             child: CircleAvatar(
               radius: 60,
               backgroundColor: kSecondary,
-              backgroundImage: NetworkImage(
-                  '${avatar ?? 'https://www.punjabigram.com/pg/ajay_devgan/ajay_devgan_wearing_black_goggle.jpg'}'),
+              backgroundImage: NetworkImage('$avatar'),
             ),
           ),
         ),

@@ -2,16 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:gitoo/Common_Resources/Constants.dart';
 
 List<String> followers = [];
+List<String> followersAvatar = [];
 Widget getFollowers() {
   if (followers.isNotEmpty) {
     return ListView.separated(
         itemBuilder: (BuildContext context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
-            child: Text(
-              '${followers[index]}',
-              style: kInsideText.copyWith(fontWeight: FontWeight.normal),
-            ),
+          return Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 15, right: 10),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage('${followersAvatar[index]}'),
+                  radius: 20,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '${followers[index]}',
+                      style:
+                          kInsideText.copyWith(fontWeight: FontWeight.normal),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           );
         },
         separatorBuilder: (BuildContext context, index) {
@@ -23,7 +41,7 @@ Widget getFollowers() {
   } else {
     return Center(
       child: Text(
-        'Bhai ko koi Follow nahi karta',
+        'Nothing to Show here',
         style: kInsideText,
       ),
     );
@@ -31,16 +49,34 @@ Widget getFollowers() {
 }
 
 List<String> following = [];
+List<String> followingAvatar = [];
 Widget getFollowing() {
   if (following.isNotEmpty) {
     return ListView.separated(
         itemBuilder: (BuildContext context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
-            child: Text(
-              '${following[index]}',
-              style: kInsideText.copyWith(fontWeight: FontWeight.normal),
-            ),
+          return Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 15, right: 10),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage('${followingAvatar[index]}'),
+                  radius: 20,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '${following[index]}',
+                      style:
+                          kInsideText.copyWith(fontWeight: FontWeight.normal),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           );
         },
         separatorBuilder: (BuildContext context, index) {
@@ -52,7 +88,7 @@ Widget getFollowing() {
   } else {
     return Center(
       child: Text(
-        'Bhai bhi kisi ko Follow nahi karta',
+        'Nothing to Show here',
         style: kInsideText,
       ),
     );
@@ -60,16 +96,46 @@ Widget getFollowing() {
 }
 
 List<String> organizations = [];
+List<String> organizationsAvatar = [];
+List<String> organizationsDesc = [];
 Widget getOrgs() {
   if (organizations.isNotEmpty) {
     return ListView.separated(
         itemBuilder: (BuildContext context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
-            child: Text(
-              '${organizations[index]}',
-              style: kInsideText.copyWith(fontWeight: FontWeight.normal),
-            ),
+          return Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 15, right: 10),
+                child: CircleAvatar(
+                  backgroundImage:
+                      NetworkImage('${organizationsAvatar[index]}'),
+                  radius: 20,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '${organizations[index]}',
+                          style: kInsideText.copyWith(
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '${organizationsDesc[index] ?? 'I don\'t know'}',
+                      style: kInsideText.copyWith(color: kNeon),
+                    ),
+                  ],
+                ),
+              )
+            ],
           );
         },
         separatorBuilder: (BuildContext context, index) {
@@ -81,7 +147,7 @@ Widget getOrgs() {
   } else {
     return Center(
       child: Text(
-        'Bhai ko kahi kaam nahi mila',
+        'Nothing to Show here',
         style: kInsideText,
       ),
     );
@@ -89,15 +155,34 @@ Widget getOrgs() {
 }
 
 List<String> repos = [];
+List<String> reposLanguage = [];
 Widget getRepos() {
   if (repos.isNotEmpty) {
     return ListView.separated(
         itemBuilder: (BuildContext context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
-            child: Text(
-              '${repos[index]}',
-              style: kInsideText.copyWith(fontWeight: FontWeight.normal),
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(left: 15),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '${repos[index]}',
+                      style:
+                          kInsideText.copyWith(fontWeight: FontWeight.normal),
+                    ),
+                  ),
+                ),
+                Text(
+                  '${reposLanguage[index] ?? 'I don\'t know'}',
+                  style: kInsideText.copyWith(color: kNeon),
+                ),
+              ],
             ),
           );
         },
@@ -110,7 +195,7 @@ Widget getRepos() {
   } else {
     return Center(
       child: Text(
-        'Bhai ne abhi tak kuch nahi banaya hai',
+        'Nothing to Show here',
         style: kInsideText,
       ),
     );
@@ -118,15 +203,34 @@ Widget getRepos() {
 }
 
 List<String> starred = [];
+List<String> starredLanguage = [];
 Widget getStarred() {
   if (starred.isNotEmpty) {
     return ListView.separated(
         itemBuilder: (BuildContext context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
-            child: Text(
-              '${starred[index]}',
-              style: kInsideText.copyWith(fontWeight: FontWeight.normal),
+          return Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(left: 15),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '${starred[index]}',
+                      style:
+                          kInsideText.copyWith(fontWeight: FontWeight.normal),
+                    ),
+                  ),
+                ),
+                Text(
+                  '${starredLanguage[index] ?? 'I don\'t know'}',
+                  style: kInsideText.copyWith(color: kNeon),
+                ),
+              ],
             ),
           );
         },
@@ -139,7 +243,7 @@ Widget getStarred() {
   } else {
     return Center(
       child: Text(
-        'Bhai ko kisi ka kaam acha nahi lagta',
+        'Nothing to show here',
         style: kInsideText,
       ),
     );

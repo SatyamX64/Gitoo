@@ -3,6 +3,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gitoo/Common_Resources/Constants.dart';
 import 'package:gitoo/Network/Network.dart';
 import 'HomePage.dart';
@@ -120,6 +121,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     NetworkLoader networkLoader =
                         NetworkLoader(username: userController.text);
                     bool isValid = await networkLoader.checkUsername();
+                    userId = userController.text;
                     if (isValid) {
                       audioCache.play('happy1.mp3');
                       setState(() {
@@ -134,6 +136,14 @@ class _SplashScreenState extends State<SplashScreen> {
                                 return HomePage();
                               }));
                     } else {
+                      Fluttertoast.showToast(
+                          msg: "I don't think that Username exists",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: kTinder,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
                       audioCache.play('sound5.mp3');
                       setState(() {
                         loading = false;
