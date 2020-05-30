@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         bottomNavigationBar: BottomNavigationBar(
           onTap: (index) {
             currentIndex = index;
@@ -129,7 +130,11 @@ class _MenuState extends State<Menu> {
                               title: 'Followers',
                               icon: MfgLabs.users,
                               iconColor: kGreen,
-                              function: getFollowers(),
+                              function: () {
+                                setState(() {
+                                  selectedList = getFollowers();
+                                });
+                              },
                               data: followers,
                             ),
                             SizedBox(
@@ -139,7 +144,11 @@ class _MenuState extends State<Menu> {
                               title: 'Following',
                               icon: Elusive.group,
                               iconColor: kGreen,
-                              function: getFollowing(),
+                              function: () {
+                                setState(() {
+                                  selectedList = getFollowing();
+                                });
+                              },
                               data: following,
                             ),
                             SizedBox(
@@ -149,7 +158,11 @@ class _MenuState extends State<Menu> {
                               title: 'Starred',
                               icon: Icons.star,
                               iconColor: kYellow,
-                              function: getStarred(),
+                              function: () {
+                                setState(() {
+                                  selectedList = getStarred();
+                                });
+                              },
                               data: starred,
                             ),
                           ],
@@ -185,7 +198,11 @@ class _MenuState extends State<Menu> {
                                       title: 'Repos',
                                       iconColor: kOrange,
                                       icon: Elusive.github,
-                                      function: getRepos(),
+                                      function: () {
+                                        setState(() {
+                                          selectedList = getRepos();
+                                        });
+                                      },
                                     ),
                                     SizedBox(
                                       height: 20,
@@ -194,7 +211,11 @@ class _MenuState extends State<Menu> {
                                       data: organizations,
                                       iconColor: kOrange,
                                       icon: FontAwesomeIcons.briefcase,
-                                      function: getOrgs(),
+                                      function: () {
+                                        setState(() {
+                                          selectedList = getOrgs();
+                                        });
+                                      },
                                       title: 'Orgs',
                                     ),
                                   ],

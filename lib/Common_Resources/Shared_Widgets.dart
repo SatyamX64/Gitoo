@@ -61,7 +61,7 @@ class SweetBox extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color iconColor;
-  final Widget function;
+  final Function function;
   final int flex;
   final List data;
   SweetBox(
@@ -76,9 +76,7 @@ class SweetBox extends StatelessWidget {
     return Expanded(
       flex: flex,
       child: GestureDetector(
-        onTap: () {
-          selectedList = function;
-        },
+        onTap: function,
         child: GoodBox(
           child: Column(
             children: <Widget>[

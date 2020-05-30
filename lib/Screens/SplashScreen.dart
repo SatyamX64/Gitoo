@@ -40,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: kPrimary,
         body: Column(
           children: <Widget>[
@@ -71,38 +72,35 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            Visibility(
-              visible: !loading,
-              child: Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-                  alignment: Alignment.topCenter,
-                  color: kPrimary,
-                  child: TextField(
-                    controller: userController,
-                    focusNode: userFocusNode,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Balsamiq',
-                      fontWeight: FontWeight.w700,
-                    ),
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(
-                          color: kNeon,
-                          width: 4,
-                        ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                alignment: Alignment.topCenter,
+                color: kPrimary,
+                child: TextField(
+                  controller: userController,
+                  focusNode: userFocusNode,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Balsamiq',
+                    fontWeight: FontWeight.w700,
+                  ),
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        color: kNeon,
+                        width: 4,
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(
-                          color: kNeon,
-                          width: 4,
-                        ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        color: kNeon,
+                        width: 4,
                       ),
                     ),
                   ),
@@ -116,26 +114,29 @@ class _SplashScreenState extends State<SplashScreen> {
                 color: kPrimary,
                 child: GestureDetector(
                   onTap: () async {
+                    setState(() {
+                      loading = true;
+                    });
                     NetworkLoader networkLoader =
                         NetworkLoader(username: userController.text);
                     bool isValid = await networkLoader.checkUsername();
                     if (isValid) {
                       audioCache.play('happy1.mp3');
                       setState(() {
-                        loading = true;
                         animationType = "success";
                       });
                       await networkLoader.getData();
                       Navigator.push(
                           context,
                           PageRouteBuilder(
-                              transitionDuration: Duration(seconds: 2),
+                              transitionDuration: Duration(milliseconds: 10),
                               pageBuilder: (_, __, context) {
                                 return HomePage();
                               }));
                     } else {
                       audioCache.play('sound5.mp3');
                       setState(() {
+                        loading = false;
                         animationType = "fail";
                       });
                     }
@@ -171,23 +172,20 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            Visibility(
-              visible: !isFocus,
-              child: Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  color: kPrimary,
-                  child: Hero(
-                    tag: 'gitoo',
-                    child: Material(
-                      color: Colors.transparent,
-                      child: Text(
-                        'Gitoo',
-                        style: TextStyle(
-                            color: kNeon,
-                            fontSize: 50,
-                            fontWeight: FontWeight.w900),
-                      ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.center,
+                color: kPrimary,
+                child: Hero(
+                  tag: 'gitoo',
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Text(
+                      'Gitoo',
+                      style: TextStyle(
+                          color: kNeon,
+                          fontSize: 50,
+                          fontWeight: FontWeight.w900),
                     ),
                   ),
                 ),
