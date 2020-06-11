@@ -5,21 +5,24 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gitoo/Common_Resources/Constants.dart';
-import 'package:gitoo/Network/Network.dart';
-import 'HomePage.dart';
+import 'package:gitoo/DataBundle/DataBundle.dart';
+import 'package:gitoo/DataNotifier/DataNotifier.dart';
+import 'package:provider/provider.dart';
+import 'NavBar.dart';
 
-class SplashScreen extends StatefulWidget {
+class SearchScreen extends StatefulWidget {
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   bool loading = false;
   bool isFocus = false;
   final audioCache = AudioCache();
   String animationType = 'idle';
   FocusNode userFocusNode = FocusNode();
   TextEditingController userController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -40,6 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final dataBundle = Provider.of<DataBundle>(context, listen: false);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: kPrimary,
@@ -118,23 +122,35 @@ class _SplashScreenState extends State<SplashScreen> {
                     setState(() {
                       loading = true;
                     });
-                    NetworkLoader networkLoader =
-                        NetworkLoader(username: userController.text);
-                    bool isValid = await networkLoader.checkUsername();
-                    userId = userController.text;
+                    bool isValid = await dataBundle.networkLoader
+                        .checkUsername(userController.text);
                     if (isValid) {
                       audioCache.play('happy1.mp3');
                       setState(() {
                         animationType = "success";
                       });
-                      await networkLoader.getData();
+                      final user =
+                          await dataBundle.getUserData(userController.text);
+                      final userBigData =
+                          await dataBundle.getUserBigData(user.map['login']);
                       Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                              transitionDuration: Duration(milliseconds: 10),
-                              pageBuilder: (_, __, context) {
-                                return HomePage();
-                              }));
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(seconds: 3),
+                          pageBuilder: (_, __, context) {
+                            return Provider<User>.value(
+                              value: user,
+                              child: Provider<UserBigData>.value(
+                                value: userBigData,
+                                child: ChangeNotifierProvider<DataNotifier>(
+                                  create: (context) => DataNotifier(context),
+                                  child: NavBar(),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
                     } else {
                       Fluttertoast.showToast(
                           msg: "I don't think that Username exists",
@@ -165,7 +181,8 @@ class _SplashScreenState extends State<SplashScreen> {
                           'Search',
                           style: TextStyle(
                               color: kPrimary,
-                              fontWeight: FontWeight.w900,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Raleway',
                               fontSize: 30),
                         ),
                       ),
@@ -195,7 +212,8 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(
                           color: kNeon,
                           fontSize: 50,
-                          fontWeight: FontWeight.w900),
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),

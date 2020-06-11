@@ -1,86 +1,41 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:fluttericon/brandico_icons.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:fluttericon/modern_pictograms_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gitoo/Common_Resources/Shared_Widgets.dart';
-import 'package:gitoo/InsidePages/List.dart';
-import 'package:gitoo/Network/Network.dart';
-import 'package:gitoo/Screens/SplashScreen.dart';
+import 'package:gitoo/Common_Resources/Constants.dart';
+import 'package:gitoo/Common_Resources/GoodBox.dart';
+import 'package:gitoo/Common_Resources/SweetBox.dart';
+import 'package:gitoo/DataNotifier/DataNotifier.dart';
 import 'package:marquee/marquee.dart';
-import '../Common_Resources/Constants.dart';
-import 'About.dart';
 
-Widget selectedList = getFollowers();
-
-class HomePage extends StatefulWidget {
+class DashBoard extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _DashBoardState createState() => _DashBoardState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  int currentIndex = 0;
-  final List screens = [
-    Menu(),
-    SplashScreen(),
-    About(),
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (index) {
-              currentIndex = index;
-              setState(() {});
-            },
-            backgroundColor: kPrimary,
-            items: [
-              BottomNavigationBarItem(
-                icon: BottomBarButton(
-                  icon: Icons.home,
-                ),
-                title: Visibility(
-                  visible: false,
-                  child: Text(' '),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: BottomBarButton(
-                  icon: Icons.graphic_eq,
-                ),
-                title: Visibility(visible: false, child: Text('')),
-              ),
-              BottomNavigationBarItem(
-                icon: BottomBarButton(
-                  icon: Icons.info,
-                ),
-                title: Visibility(visible: false, child: Text('')),
-              ),
-            ],
-          ),
-          body: screens[currentIndex],
-        ),
-      ),
-    );
+class _DashBoardState extends State<DashBoard> {
+  int selectedList = 0;
+  String bio;
+  checkBio() {
+    if (bio.contains('\n')) {
+      bio = bio.replaceAll('\n', ' ');
+    }
   }
-}
 
-class Menu extends StatefulWidget {
-  @override
-  _MenuState createState() => _MenuState();
-}
-
-class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
+    DataNotifier dataNotifier = DataNotifier(context);
+    bio = dataNotifier.user.map['bio'] ?? 'Bio Not Available';
+    checkBio();
+    List dataLists = [
+      dataNotifier.showFollowers(),
+      dataNotifier.showFollowing(),
+      dataNotifier.showStarred(),
+      dataNotifier.showRepos(),
+      dataNotifier.showOrgs(),
+    ];
+
     return Stack(
       children: <Widget>[
         Column(
@@ -97,7 +52,7 @@ class _MenuState extends State<Menu> {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    '${name ?? 'Not Available'}',
+                    '${dataNotifier.user.map['name'] ?? 'Not Available'}',
                     style: kUserNameStyle,
                   ),
                 ),
@@ -119,7 +74,7 @@ class _MenuState extends State<Menu> {
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '${email ?? 'Not Available'}',
+                              '${dataNotifier.user.map['email'] ?? 'Not Available'}',
                               style: kEmailStyle,
                             ),
                           ),
@@ -132,43 +87,47 @@ class _MenuState extends State<Menu> {
                         child: Row(
                           children: <Widget>[
                             SweetBox(
-                              count: noOfFollowers,
+                              count: dataNotifier.user.map['followers'],
                               title: 'Followers',
                               icon: MfgLabs.users,
                               iconColor: kGreen,
                               function: () {
                                 setState(() {
-                                  selectedList = getFollowers();
+                                  selectedList = 0;
                                 });
                               },
+                              isPressed: selectedList == 0 ? true : false,
                             ),
                             SizedBox(
                               width: 20,
                             ),
                             SweetBox(
                               title: 'Following',
-                              count: noOfFollowing,
+                              count: dataNotifier.user.map['following'],
                               icon: Elusive.group,
                               iconColor: kGreen,
                               function: () {
                                 setState(() {
-                                  selectedList = getFollowing();
+                                  selectedList = 1;
                                 });
                               },
+                              isPressed: selectedList == 1 ? true : false,
                             ),
                             SizedBox(
                               width: 20,
                             ),
                             SweetBox(
                               title: 'Starred',
-                              count: starred.length,
+                              count: dataNotifier
+                                  .userBigData.map['starred'].length,
                               icon: Icons.star,
                               iconColor: kYellow,
                               function: () {
                                 setState(() {
-                                  selectedList = getStarred();
+                                  selectedList = 2;
                                 });
                               },
+                              isPressed: selectedList == 2 ? true : false,
                             ),
                           ],
                         ),
@@ -185,7 +144,8 @@ class _MenuState extends State<Menu> {
                             Expanded(
                               flex: 20,
                               child: GoodBox(
-                                child: selectedList,
+                                isPressed: false,
+                                child: dataLists[selectedList],
                               ),
                             ),
                             SizedBox(
@@ -199,29 +159,35 @@ class _MenuState extends State<Menu> {
                                       CrossAxisAlignment.stretch,
                                   children: <Widget>[
                                     SweetBox(
-                                      count: noOfRepos,
+                                      count:
+                                          dataNotifier.user.map['public_repos'],
                                       title: 'Repos',
                                       iconColor: kOrange,
                                       icon: Elusive.github,
                                       function: () {
                                         setState(() {
-                                          selectedList = getRepos();
+                                          selectedList = 3;
                                         });
                                       },
+                                      isPressed:
+                                          selectedList == 3 ? true : false,
                                     ),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     SweetBox(
-                                      count: organizations.length,
+                                      count: dataNotifier.userBigData
+                                          .map['organisations'].length,
                                       iconColor: kOrange,
                                       icon: ModernPictograms.money,
+                                      title: 'Orgs',
                                       function: () {
                                         setState(() {
-                                          selectedList = getOrgs();
+                                          selectedList = 4;
                                         });
                                       },
-                                      title: 'Orgs',
+                                      isPressed:
+                                          selectedList == 4 ? true : false,
                                     ),
                                   ],
                                 ),
@@ -239,7 +205,7 @@ class _MenuState extends State<Menu> {
                       child: Container(
                         alignment: Alignment.center,
                         child: Marquee(
-                          text: '${info ?? 'Bio Not Available'}',
+                          text: '$bio',
                           style: kInfoStyle,
                           scrollAxis: Axis.horizontal,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -261,8 +227,21 @@ class _MenuState extends State<Menu> {
           ],
         ),
         Positioned(
-          top: (MediaQuery.of(context).size.height) / 10,
-          left: 20,
+          top: (MediaQuery.of(context).size.height) / 20,
+          left: 10,
+          child: CircleAvatar(
+            radius: 75,
+            backgroundColor: Colors.transparent,
+            child: FlareActor(
+              'assets/Loading.flr',
+              animation: "Alarm",
+              alignment: Alignment.center,
+            ),
+          ),
+        ),
+        Positioned(
+          top: (MediaQuery.of(context).size.height) / 11,
+          left: 40,
           child: Container(
             decoration: BoxDecoration(
               boxShadow: [
@@ -271,9 +250,10 @@ class _MenuState extends State<Menu> {
               shape: BoxShape.circle,
             ),
             child: CircleAvatar(
-              radius: 60,
+              radius: 45,
               backgroundColor: kSecondary,
-              backgroundImage: NetworkImage('$avatar'),
+              backgroundImage:
+                  NetworkImage(dataNotifier.user.map['avatar_url']),
             ),
           ),
         ),

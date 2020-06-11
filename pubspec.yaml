@@ -77,6 +77,15 @@ flutter:
         - asset: fonts/BalsamiqSans-Regular.ttf
         - asset: fonts/BalsamiqSans-Bold.ttf
           weight: 700
+    - family: Raleway
+      fonts:
+        - asset: fonts/Raleway-Regular.ttf
+        - asset: fonts/Raleway-SemiBold.ttf
+          weight: 700
+        - asset: fonts/Raleway-Black.ttf
+          weight: 900
+        - asset: fonts/Raleway-Thin.ttf
+          weight: 400
   #   - family: Trajan Pro
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700

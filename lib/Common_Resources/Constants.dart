@@ -21,8 +21,11 @@ Color kInsideHeadingColor = kNeon;
 Color kHomeHeadingFont = kNeon;
 Color kHomeTextFont = Colors.white;
 
-TextStyle kGitooTheme =
-    TextStyle(color: kNeon, fontSize: 50, fontWeight: FontWeight.w900);
+TextStyle kGitooTheme = TextStyle(
+    color: kNeon,
+    fontSize: 50,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'Raleway');
 
 TextStyle kInsideText = TextStyle(
   color: kInsideFontColor,
@@ -42,7 +45,10 @@ TextStyle kHomeText = TextStyle(
     fontWeight: FontWeight.bold,
     fontFamily: 'Balsamiq');
 TextStyle kHomeHeading = TextStyle(
-    color: kHomeHeadingFont, fontWeight: FontWeight.bold, fontSize: 20);
+    color: kHomeHeadingFont,
+    fontWeight: FontWeight.w700,
+    fontSize: 20,
+    fontFamily: 'Raleway');
 TextStyle kUserNameStyle = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.bold,

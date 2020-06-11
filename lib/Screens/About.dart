@@ -1,15 +1,17 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fluttericon/brandico_icons.dart';
-import 'package:fluttericon/rpg_awesome_icons.dart';
 import 'package:gitoo/Common_Resources/Constants.dart';
-import 'package:gitoo/Network/Network.dart';
+import 'package:gitoo/DataBundle/DataBundle.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kPrimary,
@@ -17,17 +19,33 @@ class About extends StatelessWidget {
           children: <Widget>[
             Expanded(
               flex: 2,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                  BoxShadow(color: kNeon, spreadRadius: 5, blurRadius: 3),
-                ]),
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(avatar),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    left: (MediaQuery.of(context).size.width) / 2 - 95,
+                    child: CircleAvatar(
+                      radius: 95,
+                      backgroundColor: Colors.transparent,
+                      child: FlareActor(
+                        'assets/Loading.flr',
+                        animation: "Alarm",
+                        alignment: Alignment.center,
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned(
+                    top: 35,
+                    left: MediaQuery.of(context).size.width / 2 - 60,
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: CircleAvatar(
+                        radius: 60,
+                        backgroundColor: kPrimary,
+                        backgroundImage: NetworkImage(user.map['avatar_url']),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
@@ -39,17 +57,25 @@ class About extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '$name',
+                      '${user.map['name']}',
                       style: kUserNameStyle,
                     ),
                     Text(
-                      '${email ?? 'Email Not Available'}',
+                      '${user.map['email'] ?? 'Email Not Available'}',
                       style: kEmailStyle,
                     ),
-                    Text(
-                      '${info ?? 'Bio Not Available'}',
-                      textAlign: TextAlign.center,
-                      style: kHomeText.copyWith(fontSize: 15),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 50),
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            '${user.map['bio'] ?? 'Bio Not Available'}',
+                            textAlign: TextAlign.center,
+                            style: kHomeText.copyWith(fontSize: 15),
+                          ),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 5,
@@ -64,7 +90,7 @@ class About extends StatelessWidget {
                             size: 23,
                           ),
                           Text(
-                            '${location ?? 'Location Not Found'}',
+                            '${user.map['location'] ?? 'Location Not Found'}',
                             style: kHomeText,
                           ),
                         ],
@@ -83,7 +109,8 @@ class About extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            _launchURL('https://www.twitter.com/$twitter');
+                            _launchURL(
+                                'https://www.twitter.com/${user.map['twitter']}');
                           },
                           child: Icon(
                             Brandico.twitter_bird,
@@ -95,7 +122,8 @@ class About extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            _launchURL('https://www.github.com/$userId');
+                            _launchURL(
+                                'https://www.github.com/${user.map['login_id']}');
                           },
                           child: Icon(
                             Brandico.github_1,
@@ -107,8 +135,7 @@ class About extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            print('$blogger');
-                            _launchURL('$blogger');
+                            _launchURL('https://${user.map['blog']}');
                           },
                           child: Icon(
                             Brandico.blogger_rect,
@@ -123,7 +150,7 @@ class About extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  Share.share('http://www.github.com/$userId');
+                  Share.share('http://www.github.com/${user.map['login_id']}');
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 100, vertical: 25),
