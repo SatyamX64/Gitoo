@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gitoo/Common_Resources/Constants.dart';
+import 'package:gitoo/Constants.dart';
 import 'package:gitoo/Screens/SearchScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimary,
           primarySwatch: kPrimarySwatch,
           accentColor: kAccentColor,
-
         ),
         home: SafeArea(child: SearchScreen()),
         debugShowCheckedModeBanner: false,

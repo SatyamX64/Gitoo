@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gitoo/Common_Resources/Constants.dart';
+import 'package:gitoo/Constants.dart';
 import 'package:gitoo/DataBundle/DataBundle.dart';
 import 'package:provider/provider.dart';
 

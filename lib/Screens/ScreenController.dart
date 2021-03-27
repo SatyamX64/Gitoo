@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:gitoo/Common_Resources/NavBarButton.dart';
+import 'package:gitoo/Widgets/BottomBarButton.dart';
 import 'package:gitoo/Screens/About.dart';
 import 'package:gitoo/Screens/DashBoard.dart';
 import 'package:gitoo/Screens/SearchScreen.dart';
-import '../Common_Resources/Constants.dart';
 
-class NavBar extends StatefulWidget {
+class ScreenController extends StatefulWidget {
   @override
-  _NavBarState createState() => _NavBarState();
+  _ScreenControllerState createState() => _ScreenControllerState();
 }
 
-class _NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
-  int selectedIndex = 0;
+class _ScreenControllerState extends State<ScreenController> with SingleTickerProviderStateMixin {
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    List<Widget> screens = [DashBoard(), SearchScreen(), About()];
+    List<Widget> _screens = [DashBoard(), SearchScreen(), About()];
     return WillPopScope(
       onWillPop: () async => false,
       child: SafeArea(
@@ -25,35 +24,36 @@ class _NavBarState extends State<NavBar> with SingleTickerProviderStateMixin {
             showUnselectedLabels: false,
             onTap: (index) {
               setState(() {
-                selectedIndex = index;
+                _selectedIndex = index;
               });
             },
-            backgroundColor: kPrimary,
+            backgroundColor: Theme.of(context).primaryColor,
             items: [
               BottomNavigationBarItem(
-                icon: NavBarButton(
+                icon: BottomBarButton(
                   icon: Icons.home,
-                  isPressed: selectedIndex == 0 ? true : false,
+                  isPressed: _selectedIndex == 0 ? true : false,
                 ),
-                title: Text(''),
+                
+                label: '',
               ),
               BottomNavigationBarItem(
-                icon: NavBarButton(
+                icon: BottomBarButton(
                   icon: Icons.graphic_eq,
-                  isPressed: selectedIndex == 1 ? true : false,
+                  isPressed: _selectedIndex == 1 ? true : false,
                 ),
-                title: Text(''),
+                label: '',
               ),
               BottomNavigationBarItem(
-                icon: NavBarButton(
+                icon: BottomBarButton(
                   icon: Icons.info,
-                  isPressed: selectedIndex == 2 ? true : false,
+                  isPressed: _selectedIndex == 2 ? true : false,
                 ),
-                title: Text(''),
+                label: '',
               ),
             ],
           ),
-          body: screens[selectedIndex],
+          body: _screens[_selectedIndex],
         ),
       ),
     );

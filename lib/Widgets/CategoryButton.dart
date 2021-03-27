@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'Constants.dart';
-import 'GoodBox.dart';
+import '../Constants.dart';
+import 'NeumorphicBox.dart';
 
-class SweetBox extends StatelessWidget {
+class CategoryButton extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color iconColor;
   final Function function;
   final int count;
   final bool isPressed;
-  SweetBox(
+  CategoryButton(
       {this.count,
       this.title,
       this.icon,
@@ -21,7 +21,7 @@ class SweetBox extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: function,
-        child: GoodBox(
+        child: NeumorphicBox(
           isPressed: isPressed,
           child: Column(
             children: <Widget>[

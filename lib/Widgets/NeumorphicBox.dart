@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'Constants.dart';
+import '../Constants.dart';
 
-class GoodBox extends StatelessWidget {
+class NeumorphicBox extends StatelessWidget {
   final Widget child;
   final bool isPressed;
-  GoodBox({this.child, this.isPressed = false});
+  NeumorphicBox({this.child, this.isPressed = false});
   @override
   Widget build(BuildContext context) {
     return Container(

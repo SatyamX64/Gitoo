@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gitoo/Common_Resources/Constants.dart';
+import 'package:gitoo/Constants.dart';
 import 'package:gitoo/DataBundle/DataBundle.dart';
 import 'package:gitoo/DataNotifier/DataNotifier.dart';
 import 'package:provider/provider.dart';
-import 'NavBar.dart';
+import 'ScreenController.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -56,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           await _dataBundle.getUserData(_userController.text);
                       final _userBigData =
                           await _dataBundle.getUserBigData(_user.map['login']);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                           transitionDuration: Duration(seconds: 3),
@@ -67,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               Provider<UserBigData>.value(value: _userBigData),
                               ChangeNotifierProvider<DataNotifier>(create: (ctx) => DataNotifier(ctx),),
                              ],
-                             child: NavBar(),); 
+                             child: ScreenController(),); 
                            
                           },
                         ),

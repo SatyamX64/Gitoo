@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'Constants.dart';
+import '../Constants.dart';
 
-class NavBarButton extends StatelessWidget {
+class BottomBarButton extends StatelessWidget {
   final IconData icon;
   final bool isPressed;
-  NavBarButton({this.icon, this.isPressed});
+  BottomBarButton({this.icon, this.isPressed});
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(top: 5),
-      width: 80,
-      height: 80,
+      width: size.width*0.20,
+      height: size.width*0.20,
       decoration: BoxDecoration(
-        color: kPrimary,
+        color: Theme.of(context).primaryColor,
         boxShadow: isPressed == true
             ? [
                 BoxShadow(
@@ -31,7 +32,7 @@ class NavBarButton extends StatelessWidget {
       child: Icon(
         icon,
         color: isPressed == true ? kAccentColor : kTinder,
-        size: 40,
+        size: size.width*0.12,
       ),
     );
   }

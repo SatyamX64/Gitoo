@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:fluttericon/modern_pictograms_icons.dart';
-import 'package:gitoo/Common_Resources/Constants.dart';
-import 'package:gitoo/Common_Resources/GoodBox.dart';
-import 'package:gitoo/Common_Resources/SweetBox.dart';
+import 'package:gitoo/Constants.dart';
+import 'package:gitoo/Widgets/NeumorphicBox.dart';
+import 'package:gitoo/Widgets/CategoryButton.dart';
 import 'package:gitoo/DataNotifier/DataNotifier.dart';
 import 'package:marquee/marquee.dart';
 
@@ -26,6 +26,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     DataNotifier dataNotifier = DataNotifier(context);
+    final size = MediaQuery.of(context).size;
     bio = dataNotifier.user.map['bio'] ?? 'Bio Not Available';
     checkBio();
     List dataLists = [
@@ -39,42 +40,40 @@ class _DashBoardState extends State<DashBoard> {
     return Stack(
       children: <Widget>[
         Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
               flex: 3,
               child: Container(
                 alignment: Alignment.bottomRight,
-                padding: EdgeInsets.only(left: 150, right: 5),
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                  color: kPrimary,
-                ),
+                padding: EdgeInsets.only(left: size.width*0.4, right: 10),
+                color: Theme.of(context).primaryColor,
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    '${dataNotifier.user.map['name'] ?? 'Not Available'}',
+                    '${dataNotifier.user.map['name']?? 'Not Available'}',
                     style: kUserNameStyle,
                   ),
                 ),
               ),
             ),
             Expanded(
-              flex: 8,
+              flex: 9,
               child: Container(
-                width: double.maxFinite,
                 padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                decoration: BoxDecoration(color: kPrimary),
+                color: Theme.of(context).primaryColor,
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      flex: 10,
+                      flex: 12,
                       child: Container(
-                        margin: EdgeInsets.only(left: 120, bottom: 10),
-                        child: GoodBox(
+                        margin: EdgeInsets.only(left: size.width*0.2, bottom: size.width*0.05),
+                  alignment: Alignment.centerRight,
+                        child: NeumorphicBox(
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '${dataNotifier.user.map['email'] ?? 'Not Available'}',
+                              '${dataNotifier.user.map['email']?? 'Not Available'}',
                               style: kEmailStyle,
                             ),
                           ),
@@ -86,7 +85,7 @@ class _DashBoardState extends State<DashBoard> {
                       child: Container(
                         child: Row(
                           children: <Widget>[
-                            SweetBox(
+                            CategoryButton(
                               count: dataNotifier.user.map['followers'],
                               title: 'Followers',
                               icon: MfgLabs.users,
@@ -99,9 +98,9 @@ class _DashBoardState extends State<DashBoard> {
                               isPressed: selectedList == 0 ? true : false,
                             ),
                             SizedBox(
-                              width: 20,
+                              width: size.width*0.06,
                             ),
-                            SweetBox(
+                            CategoryButton(
                               title: 'Following',
                               count: dataNotifier.user.map['following'],
                               icon: Elusive.group,
@@ -114,9 +113,9 @@ class _DashBoardState extends State<DashBoard> {
                               isPressed: selectedList == 1 ? true : false,
                             ),
                             SizedBox(
-                              width: 20,
+                              width: size.width*0.06,
                             ),
-                            SweetBox(
+                            CategoryButton(
                               title: 'Starred',
                               count: dataNotifier
                                   .userBigData.map['starred'].length,
@@ -134,7 +133,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: size.width*0.04,
                     ),
                     Expanded(
                       flex: 44,
@@ -143,13 +142,13 @@ class _DashBoardState extends State<DashBoard> {
                           children: <Widget>[
                             Expanded(
                               flex: 20,
-                              child: GoodBox(
+                              child: NeumorphicBox(
                                 isPressed: false,
                                 child: dataLists[selectedList],
                               ),
                             ),
-                            SizedBox(
-                              width: 20,
+                           SizedBox(
+                              width: size.width*0.06,
                             ),
                             Expanded(
                               flex: 9,
@@ -158,7 +157,7 @@ class _DashBoardState extends State<DashBoard> {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: <Widget>[
-                                    SweetBox(
+                                    CategoryButton(
                                       count:
                                           dataNotifier.user.map['public_repos'],
                                       title: 'Repos',
@@ -172,10 +171,10 @@ class _DashBoardState extends State<DashBoard> {
                                       isPressed:
                                           selectedList == 3 ? true : false,
                                     ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    SweetBox(
+                                   SizedBox(
+                      height: size.width*0.04,
+                    ),
+                                    CategoryButton(
                                       count: dataNotifier.userBigData
                                           .map['organisations'].length,
                                       iconColor: kOrange,
@@ -198,7 +197,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: size.width*0.04,
                     ),
                     Expanded(
                       flex: 10,
@@ -230,7 +229,7 @@ class _DashBoardState extends State<DashBoard> {
           top: (MediaQuery.of(context).size.height) / 20,
           left: 10,
           child: CircleAvatar(
-            radius: 75,
+            radius: size.width*0.20,
             backgroundColor: Colors.transparent,
             child: FlareActor(
               'assets/Loading.flr',
@@ -240,17 +239,17 @@ class _DashBoardState extends State<DashBoard> {
           ),
         ),
         Positioned(
-          top: (MediaQuery.of(context).size.height) / 11,
-          left: 40,
+          top: (MediaQuery.of(context).size.height) / 10,
+          left: size.width*0.12,
           child: Container(
             decoration: BoxDecoration(
               boxShadow: [
-                BoxShadow(color: kAccentColor, blurRadius: 15, spreadRadius: 5),
+                BoxShadow(color: Theme.of(context).accentColor, blurRadius: 15, spreadRadius: 5),
               ],
               shape: BoxShape.circle,
             ),
             child: CircleAvatar(
-              radius: 45,
+              radius: size.width*0.11,
               backgroundColor: kSecondary,
               backgroundImage:
                   NetworkImage(dataNotifier.user.map['avatar_url']),
