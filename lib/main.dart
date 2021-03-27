@@ -9,14 +9,13 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     // Locks the App to Portrait
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    var systemBarSettings = SystemUiOverlayStyle.light.copyWith(
-        systemNavigationBarColor: kPrimary, statusBarColor: kPrimary);
+    var systemBarSettings = SystemUiOverlayStyle.light
+        .copyWith(systemNavigationBarColor: kPrimary, statusBarColor: kPrimary);
     SystemChrome.setSystemUIOverlayStyle(systemBarSettings);
     return MaterialApp(
       title: 'Gitoo',
@@ -25,7 +24,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: kPrimarySwatch,
         accentColor: kAccentColor,
       ),
-      home: SafeArea(child: SearchScreen()),
+      home: SafeArea(
+          child: SearchScreen()
+              ),
       debugShowCheckedModeBanner: false,
     );
   }

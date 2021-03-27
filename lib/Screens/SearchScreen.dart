@@ -5,7 +5,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gitoo/Constants.dart';
-import 'package:gitoo/Widgets/ListBuilder.dart';
 import 'package:gitoo/Network/Network.dart';
 import 'package:gitoo/Network/User.dart';
 import 'package:provider/provider.dart';
@@ -38,8 +37,15 @@ class _SearchScreenState extends State<SearchScreen> {
       }
     });
   }
-
+  
+  @override
+  void dispose() {
+    _userController.dispose();
+    _userFocusNode.dispose();
+    super.dispose();
+  }
   getUserData() async {
+    if(_isLoading) return;
     setState(() {
       _isLoading = true;
     });
