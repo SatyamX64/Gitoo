@@ -245,7 +245,7 @@ class _DashBoardState extends State<DashBoard> {
           child: Container(
             decoration: BoxDecoration(
               boxShadow: [
-                BoxShadow(color: kNeon, blurRadius: 15, spreadRadius: 5),
+                BoxShadow(color: kAccentColor, blurRadius: 15, spreadRadius: 5),
               ],
               shape: BoxShape.circle,
             ),

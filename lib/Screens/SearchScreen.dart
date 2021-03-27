@@ -16,34 +16,83 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  bool loading = false;
-  bool isFocus = false;
-  final audioCache = AudioCache();
-  String animationType = 'idle';
-  FocusNode userFocusNode = FocusNode();
-  TextEditingController userController = TextEditingController();
+  bool _isLoading = false;
+  final _audioCache = AudioCache();
+  String _animationType = 'idle';
+  FocusNode _userFocusNode = FocusNode();
+  TextEditingController _userController = TextEditingController();
+  DataBundle _dataBundle;
+   
 
   @override
   void initState() {
     super.initState();
-    userFocusNode.addListener(() {
-      if (userFocusNode.hasFocus) {
+    _dataBundle = Provider.of<DataBundle>(context, listen: false);
+    _userFocusNode.addListener(() {
+      if (_userFocusNode.hasFocus) {
         setState(() {
-          isFocus = true;
-          animationType = "test";
+          _animationType = "test";
         });
       } else {
         setState(() {
-          isFocus = false;
-          animationType = "idle";
+          _animationType = "idle";
         });
       }
     });
   }
+  
+  getUserData() async{
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    bool isValid = await _dataBundle.networkLoader
+                        .checkUsername(_userController.text);
+                    if (isValid) {
+                      _audioCache.play('happy1.mp3');
+                      setState(() {
+                        _animationType = "success";
+                      });
+                      final _user =
+                          await _dataBundle.getUserData(_userController.text);
+                      final _userBigData =
+                          await _dataBundle.getUserBigData(_user.map['login']);
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(seconds: 3),
+                          pageBuilder: (_, __, context) {
+                            return MultiProvider(
+                              providers: [
+                              Provider<User>.value(value: _user),
+                              Provider<UserBigData>.value(value: _userBigData),
+                              ChangeNotifierProvider<DataNotifier>(create: (ctx) => DataNotifier(ctx),),
+                             ],
+                             child: NavBar(),); 
+                           
+                          },
+                        ),
+                      );
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: "Something is Wrong :( ",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: kTinder,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      _audioCache.play('sound5.mp3');
+                      setState(() {
+                        _isLoading = false;
+                        _animationType = "fail";
+                      });
+                    }
+                  
+  }
 
   @override
   Widget build(BuildContext context) {
-    final dataBundle = Provider.of<DataBundle>(context, listen: false);
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: kPrimary,
@@ -53,24 +102,20 @@ class _SearchScreenState extends State<SearchScreen> {
               flex: 4,
               child: Container(
                 alignment: Alignment.center,
-                color: kPrimary,
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: CircleAvatar(
-                    radius: 120,
-                    backgroundColor: kNeon,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          animationType = "idle";
-                        });
-                      },
-                      child: ClipOval(
-                        child: FlareActor(
-                          'assets/Teddy.flr',
-                          animation: animationType,
-                          alignment: Alignment.center,
-                        ),
+                child: CircleAvatar(
+                  radius: size.width*0.3,
+                  backgroundColor: Theme.of(context).accentColor,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _animationType = "idle";
+                      });
+                    },
+                    child: ClipOval(
+                      child: FlareActor(
+                        'assets/Teddy.flr',
+                        animation: _animationType,
+                        alignment: Alignment.center,
                       ),
                     ),
                   ),
@@ -80,12 +125,14 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               flex: 2,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.symmetric(horizontal: size.width*0.1),
                 alignment: Alignment.topCenter,
-                color: kPrimary,
                 child: TextField(
-                  controller: userController,
-                  focusNode: userFocusNode,
+                  controller: _userController,
+                  focusNode: _userFocusNode,
+         onSubmitted: (_){
+             getUserData();
+         },       
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: 'Balsamiq',
@@ -95,16 +142,16 @@ class _SearchScreenState extends State<SearchScreen> {
                     fillColor: Colors.white,
                     filled: true,
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(size.width*0.1),
                       borderSide: BorderSide(
-                        color: kNeon,
+                        color: Theme.of(context).accentColor,
                         width: 4,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(size.width*0.1),
                       borderSide: BorderSide(
-                        color: kNeon,
+                        color: Theme.of(context).accentColor,
                         width: 4,
                       ),
                     ),
@@ -114,67 +161,20 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Expanded(
               child: Container(
+                
                 alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(left: 80, right: 80, bottom: 30),
-                color: kPrimary,
-                child: GestureDetector(
-                  onTap: () async {
-                    setState(() {
-                      loading = true;
-                    });
-                    bool isValid = await dataBundle.networkLoader
-                        .checkUsername(userController.text);
-                    if (isValid) {
-                      audioCache.play('happy1.mp3');
-                      setState(() {
-                        animationType = "success";
-                      });
-                      final user =
-                          await dataBundle.getUserData(userController.text);
-                      final userBigData =
-                          await dataBundle.getUserBigData(user.map['login']);
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          transitionDuration: Duration(seconds: 3),
-                          pageBuilder: (_, __, context) {
-                            return Provider<User>.value(
-                              value: user,
-                              child: Provider<UserBigData>.value(
-                                value: userBigData,
-                                child: ChangeNotifierProvider<DataNotifier>(
-                                  create: (context) => DataNotifier(context),
-                                  child: NavBar(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    } else {
-                      Fluttertoast.showToast(
-                          msg: "I don't think that Username exists",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: kTinder,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                      audioCache.play('sound5.mp3');
-                      setState(() {
-                        loading = false;
-                        animationType = "fail";
-                      });
-                    }
-                  },
-                  child: Visibility(
-                    visible: !loading,
+                padding: EdgeInsets.only(left: size.width*0.3, right: size.width*0.3, bottom: size.width*0.1),
+                child: _isLoading? SpinKitChasingDots(
+                  color: Theme.of(context).accentColor,
+                ) : GestureDetector(
+                  onTap: getUserData,child: Visibility(
+                    visible: !_isLoading,
                     child: Container(
                       padding:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
-                          color: kNeon,
-                          borderRadius: BorderRadius.circular(30)),
+                          color: Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.circular(size.width*0.1)),
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
@@ -183,7 +183,8 @@ class _SearchScreenState extends State<SearchScreen> {
                               color: kPrimary,
                               fontWeight: FontWeight.w400,
                               fontFamily: 'Raleway',
-                              fontSize: 30),
+                              fontSize: size.width*0.08
+                              ),
                         ),
                       ),
                     ),
@@ -191,18 +192,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            Visibility(
-              visible: loading,
-              child: Expanded(
-                child: SpinKitChasingDots(
-                  color: kNeon,
-                ),
-              ),
-            ),
+          
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                color: kPrimary,
                 child: Hero(
                   tag: 'gitoo',
                   child: Material(
@@ -210,8 +203,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Text(
                       'Gitoo',
                       style: TextStyle(
-                          color: kNeon,
-                          fontSize: 50,
+                          color: Theme.of(context).accentColor,
+                          fontSize: size.width*0.12,
                           fontFamily: 'Raleway',
                           fontWeight: FontWeight.w700),
                     ),

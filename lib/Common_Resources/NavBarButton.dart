@@ -30,7 +30,7 @@ class NavBarButton extends StatelessWidget {
       ),
       child: Icon(
         icon,
-        color: isPressed == true ? kNeon : kTinder,
+        color: isPressed == true ? kAccentColor : kTinder,
         size: 40,
       ),
     );

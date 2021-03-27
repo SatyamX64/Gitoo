@@ -135,7 +135,7 @@ class DataNotifier extends ChangeNotifier {
                       ),
                       Text(
                         '${organisationsList[index]['description'] ?? 'I don\'t know'}',
-                        style: kInsideText.copyWith(color: kNeon),
+                        style: kInsideText.copyWith(color: kAccentColor),
                       ),
                     ],
                   ),
@@ -183,7 +183,7 @@ class DataNotifier extends ChangeNotifier {
                   ),
                   Text(
                     '${reposList[index]['language'] ?? 'I don\'t know'}',
-                    style: kInsideText.copyWith(color: kNeon),
+                    style: kInsideText.copyWith(color: kAccentColor),
                   ),
                 ],
               ),
@@ -229,7 +229,7 @@ class DataNotifier extends ChangeNotifier {
                   ),
                   Text(
                     '${starredList[index]['language'] ?? 'I don\'t know'}',
-                    style: kInsideText.copyWith(color: kNeon),
+                    style: kInsideText.copyWith(color: kAccentColor),
                   ),
                 ],
               ),
