@@ -4,9 +4,12 @@ import 'package:http/http.dart';
 import 'URI.dart';
 
 class NetworkLoader {
-  final API api;
-  NetworkLoader(this.api);
-  Future<bool> checkUsername(String userId) async {
+
+  final String userId;
+  final api = API();
+  NetworkLoader(this.userId);
+  
+  Future<bool> checkUsername() async {
     try {
       final uri = api.userURI().toString() + '/$userId';
       Response response = await get(uri, headers: api.headers);
@@ -20,7 +23,28 @@ class NetworkLoader {
     }
   }
 
-  Future<Map<String, dynamic>> getData(String userId) async {
+  Future<Map> getUserData() async {
+    try{
+    final Map map = await getInitialData();
+    final List<dynamic> repoData = await getSpecificData('repos');
+    final List<dynamic> starredData = await getSpecificData('starred');
+    final List<dynamic> followersData = await getSpecificData('followers');
+    final List<dynamic> followingData = await getSpecificData('following');
+    final List<dynamic> organisationsData = await getSpecificData('orgs');
+    map['repos'] = repoData;
+    map['starred'] = starredData;
+    map['followers'] = followersData;
+    map['following'] = followingData;
+    map['organisations'] = organisationsData;
+    return map;
+    }catch(e){
+      print('ERROR: $e');
+      return null;
+    }
+    
+  }
+
+  Future<Map<String, dynamic>> getInitialData() async {
     try {
       final uri = api.userURI().toString() + '/$userId';
       Response response = await get(uri, headers: api.headers);
@@ -28,93 +52,17 @@ class NetworkLoader {
       return data;
     } catch (e) {
       print('ERROR: $e');
-      return {};
+      throw e;
     }
   }
 
-  Future<List<dynamic>> getFollowers(String userId) async {
+  Future<List<dynamic>> getSpecificData(String key) async {
     try {
       List temp = [];
       for (int page = 1;; page++) {
         final uri = api.userURI().toString() +
             '/$userId' +
-            '/followers?page=$page&per_page=100';
-        Response response = await get(uri, headers: api.headers);
-        List data = jsonDecode(response.body);
-        temp.addAll(data);
-        if (data.length < 100) break;
-      }
-      return temp;
-    } catch (e) {
-      print('ERROR: $e');
-      return [];
-    }
-  }
-
-  Future<List<dynamic>> getFollowing(String userId) async {
-    try {
-      List temp = [];
-      for (int page = 1;; page++) {
-        final uri = api.userURI().toString() +
-            '/$userId' +
-            '/following?page=$page&per_page=100';
-        Response response = await get(uri, headers: api.headers);
-        List data = jsonDecode(response.body);
-        temp.addAll(data);
-        if (data.length < 100) break;
-      }
-      return temp;
-    } catch (e) {
-      print('ERROR : $e');
-      return [];
-    }
-  }
-
-  Future<List<dynamic>> getStarred(String userId) async {
-    try {
-      List temp = [];
-      for (int page = 1;; page++) {
-        final uri = api.userURI().toString() +
-            '/$userId' +
-            '/starred?page=$page&per_page=100';
-        Response response = await get(uri, headers: api.headers);
-        List data = jsonDecode(response.body);
-        temp.addAll(data);
-        if (data.length < 100) break;
-      }
-      return temp;
-    } catch (e) {
-      print('ERROR: $e');
-      return [];
-    }
-  }
-
-  Future<List<dynamic>> getOrganisations(String userId) async {
-    try {
-      List temp = [];
-      for (int page = 0;; page++) {
-        final uri = api.userURI().toString() +
-            '/$userId' +
-            '/orgs?page=$page&per_page=100';
-        Response response = await get(uri, headers: api.headers);
-        List data = jsonDecode(response.body);
-        temp.addAll(data);
-        if (data.length < 100) break;
-      }
-      return temp;
-    } catch (e) {
-      print('ERROR : $e');
-      return [];
-    }
-  }
-
-  Future<List<dynamic>> getRepos(String userId) async {
-    try {
-      List temp = [];
-      for (int page = 0;; page++) {
-        final uri = api.userURI().toString() +
-            '/$userId' +
-            '/repos?page=$page&per_page=100';
+            '/$key?page=$page&per_page=100';
         Response response = await get(uri, headers: api.headers);
         List data = jsonDecode(response.body);
         temp.addAll(data);

@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gitoo/Constants.dart';
-import 'package:gitoo/DataBundle/DataBundle.dart';
-import 'package:provider/provider.dart';
 
-class DataNotifier extends ChangeNotifier {
-  User user;
-  UserBigData userBigData;
-  DataNotifier(BuildContext context) {
-    this.user = Provider.of<User>(context, listen: false);
-    this.userBigData = Provider.of<UserBigData>(context, listen: false);
-  }
+class ListBuilder{
+  Map userDataMap;
+  ListBuilder(this.userDataMap);
+
   Widget showFollowers() {
-    List followersList = userBigData.map['followers'];
+    List followersList = userDataMap['followers'];
     if (followersList.isNotEmpty) {
       return ListView.separated(
           itemBuilder: (BuildContext context, index) {
@@ -57,7 +52,7 @@ class DataNotifier extends ChangeNotifier {
     }
   }
   Widget showFollowing() {
-    List followingList = userBigData.map['following'];
+    List followingList = userDataMap['following'];
     if (followingList.isNotEmpty) {
       return ListView.separated(
           itemBuilder: (BuildContext context, index) {
@@ -103,7 +98,7 @@ class DataNotifier extends ChangeNotifier {
     }
   }
   Widget showOrgs() {
-    List organisationsList = userBigData.map['organisations'];
+    List organisationsList = userDataMap['organisations'];
     if (organisationsList.isNotEmpty) {
       return ListView.separated(
           itemBuilder: (BuildContext context, index) {
@@ -159,7 +154,7 @@ class DataNotifier extends ChangeNotifier {
     }
   }
   Widget showRepos() {
-    List reposList = userBigData.map['repos'];
+    List reposList = userDataMap['repos'];
     if (reposList.isNotEmpty) {
       return ListView.separated(
           itemBuilder: (BuildContext context, index) {
@@ -205,7 +200,7 @@ class DataNotifier extends ChangeNotifier {
     }
   }
   Widget showStarred() {
-    List starredList = userBigData.map['starred'];
+    List starredList = userDataMap['starred'];
     if (starredList.isNotEmpty) {
       return ListView.separated(
           itemBuilder: (BuildContext context, index) {

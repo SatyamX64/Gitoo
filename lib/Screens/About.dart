@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:fluttericon/brandico_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gitoo/Constants.dart';
-import 'package:gitoo/DataBundle/DataBundle.dart';
+import 'package:gitoo/Network/User.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -145,9 +145,9 @@ class About extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            user.map['login_id'] != null
+                            user.userId != null
                                 ? _launchURL(
-                                    'https://www.github.com/${user.map['login_id']}')
+                                    'https://www.github.com/${user.userId}')
                                 : _showToast('User Not Found');
                           },
                           child: Icon(
@@ -177,7 +177,7 @@ class About extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  Share.share('http://www.github.com/${user.map['login_id']}');
+                  Share.share('http://www.github.com/${user.userId}');
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(

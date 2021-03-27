@@ -4,10 +4,12 @@ import 'package:fluttericon/elusive_icons.dart';
 import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:fluttericon/modern_pictograms_icons.dart';
 import 'package:gitoo/Constants.dart';
+import 'package:gitoo/Network/User.dart';
 import 'package:gitoo/Widgets/NeumorphicBox.dart';
 import 'package:gitoo/Widgets/CategoryButton.dart';
-import 'package:gitoo/DataNotifier/DataNotifier.dart';
+import 'package:gitoo/Widgets/ListBuilder.dart';
 import 'package:marquee/marquee.dart';
+import 'package:provider/provider.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -16,25 +18,25 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   int selectedList = 0;
-  String bio;
-  checkBio() {
+  oneLiner(String bio) {
     if (bio.contains('\n')) {
       bio = bio.replaceAll('\n', ' ');
     }
+    return bio;
   }
 
   @override
   Widget build(BuildContext context) {
-    DataNotifier dataNotifier = DataNotifier(context);
+    final _user = Provider.of<User>(context);
+    ListBuilder listBuilder = ListBuilder(_user.map);
     final size = MediaQuery.of(context).size;
-    bio = dataNotifier.user.map['bio'] ?? 'Bio Not Available';
-    checkBio();
+
     List dataLists = [
-      dataNotifier.showFollowers(),
-      dataNotifier.showFollowing(),
-      dataNotifier.showStarred(),
-      dataNotifier.showRepos(),
-      dataNotifier.showOrgs(),
+      listBuilder.showFollowers(),
+      listBuilder.showFollowing(),
+      listBuilder.showStarred(),
+      listBuilder.showRepos(),
+      listBuilder.showOrgs(),
     ];
 
     return Stack(
@@ -51,7 +53,7 @@ class _DashBoardState extends State<DashBoard> {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    '${dataNotifier.user.map['name'] ?? 'Not Available'}',
+                    '${_user.map['name'] ?? 'Not Available'}',
                     style: kUserNameStyle,
                   ),
                 ),
@@ -74,7 +76,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '${dataNotifier.user.map['email'] ?? 'Not Available'}',
+                              '${_user.map['email'] ?? 'Not Available'}',
                               style: kEmailStyle,
                             ),
                           ),
@@ -87,7 +89,7 @@ class _DashBoardState extends State<DashBoard> {
                         child: Row(
                           children: <Widget>[
                             CategoryButton(
-                              count: dataNotifier.user.map['followers'],
+                              count: List.from(_user.map['followers']).length,
                               title: 'Followers',
                               icon: MfgLabs.users,
                               iconColor: kGreen,
@@ -103,7 +105,7 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                             CategoryButton(
                               title: 'Following',
-                              count: dataNotifier.user.map['following'],
+                              count: List.from(_user.map['following']).length,
                               icon: Elusive.group,
                               iconColor: kGreen,
                               function: () {
@@ -118,8 +120,7 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                             CategoryButton(
                               title: 'Starred',
-                              count: dataNotifier
-                                  .userBigData.map['starred'].length,
+                              count: List.from(_user.map['starred']).length,
                               icon: Icons.star,
                               iconColor: kYellow,
                               function: () {
@@ -159,8 +160,8 @@ class _DashBoardState extends State<DashBoard> {
                                       CrossAxisAlignment.stretch,
                                   children: <Widget>[
                                     CategoryButton(
-                                      count:
-                                          dataNotifier.user.map['public_repos'],
+                                      count: List.from(_user.map['repos'])
+                                          .length,
                                       title: 'Repos',
                                       iconColor: kOrange,
                                       icon: Elusive.github,
@@ -176,8 +177,8 @@ class _DashBoardState extends State<DashBoard> {
                                       height: size.width * 0.04,
                                     ),
                                     CategoryButton(
-                                      count: dataNotifier.userBigData
-                                          .map['organisations'].length,
+                                      count: List.from(_user.map['organisations'])
+                                          .length,
                                       iconColor: kOrange,
                                       icon: ModernPictograms.money,
                                       title: 'Orgs',
@@ -205,7 +206,7 @@ class _DashBoardState extends State<DashBoard> {
                       child: Container(
                         alignment: Alignment.center,
                         child: Marquee(
-                          text: '$bio',
+                          text: '${oneLiner(_user.map['bio'] ?? 'Bio Not Available')}',
                           style: kInfoStyle,
                           scrollAxis: Axis.horizontal,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,8 +225,10 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
+         
           ],
         ),
+  
         Positioned(
           top: (MediaQuery.of(context).size.height) / 20,
           left: 10,
@@ -255,8 +258,7 @@ class _DashBoardState extends State<DashBoard> {
             child: CircleAvatar(
               radius: size.width * 0.11,
               backgroundColor: kSecondary,
-              backgroundImage:
-                  NetworkImage(dataNotifier.user.map['avatar_url']),
+              backgroundImage: NetworkImage(_user.map['avatar_url']),
             ),
           ),
         ),

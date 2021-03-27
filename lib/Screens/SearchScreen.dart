@@ -5,8 +5,9 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gitoo/Constants.dart';
-import 'package:gitoo/DataBundle/DataBundle.dart';
-import 'package:gitoo/DataNotifier/DataNotifier.dart';
+import 'package:gitoo/Widgets/ListBuilder.dart';
+import 'package:gitoo/Network/Network.dart';
+import 'package:gitoo/Network/User.dart';
 import 'package:provider/provider.dart';
 import 'ScreenController.dart';
 
@@ -21,12 +22,10 @@ class _SearchScreenState extends State<SearchScreen> {
   String _animationType = 'idle';
   FocusNode _userFocusNode = FocusNode();
   TextEditingController _userController = TextEditingController();
-  DataBundle _dataBundle;
 
   @override
   void initState() {
     super.initState();
-    _dataBundle = Provider.of<DataBundle>(context, listen: false);
     _userFocusNode.addListener(() {
       if (_userFocusNode.hasFocus) {
         setState(() {
@@ -44,15 +43,16 @@ class _SearchScreenState extends State<SearchScreen> {
     setState(() {
       _isLoading = true;
     });
-    bool isValid =
-        await _dataBundle.networkLoader.checkUsername(_userController.text);
+    final _userId = _userController.text;
+    NetworkLoader networkLoader = NetworkLoader(_userId);
+    bool isValid = await networkLoader.checkUsername();
     if (isValid) {
       _audioCache.play('happy1.mp3');
       setState(() {
         _animationType = "success";
       });
-      final _user = await _dataBundle.getUserData(_userController.text);
-      final _userBigData = await _dataBundle.getUserBigData(_user.map['login']);
+      final _map = await networkLoader.getUserData();
+      final User _user = User(map: _map, userId: _userId);
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
@@ -61,10 +61,6 @@ class _SearchScreenState extends State<SearchScreen> {
             return MultiProvider(
               providers: [
                 Provider<User>.value(value: _user),
-                Provider<UserBigData>.value(value: _userBigData),
-                ChangeNotifierProvider<DataNotifier>(
-                  create: (ctx) => DataNotifier(ctx),
-                ),
               ],
               child: ScreenController(),
             );
