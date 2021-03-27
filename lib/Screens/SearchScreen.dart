@@ -22,7 +22,6 @@ class _SearchScreenState extends State<SearchScreen> {
   FocusNode _userFocusNode = FocusNode();
   TextEditingController _userController = TextEditingController();
   DataBundle _dataBundle;
-   
 
   @override
   void initState() {
@@ -40,54 +39,53 @@ class _SearchScreenState extends State<SearchScreen> {
       }
     });
   }
-  
-  getUserData() async{
-                    setState(() {
-                      _isLoading = true;
-                    });
-                    bool isValid = await _dataBundle.networkLoader
-                        .checkUsername(_userController.text);
-                    if (isValid) {
-                      _audioCache.play('happy1.mp3');
-                      setState(() {
-                        _animationType = "success";
-                      });
-                      final _user =
-                          await _dataBundle.getUserData(_userController.text);
-                      final _userBigData =
-                          await _dataBundle.getUserBigData(_user.map['login']);
-                      Navigator.pushReplacement(
-                        context,
-                        PageRouteBuilder(
-                          transitionDuration: Duration(seconds: 3),
-                          pageBuilder: (_, __, context) {
-                            return MultiProvider(
-                              providers: [
-                              Provider<User>.value(value: _user),
-                              Provider<UserBigData>.value(value: _userBigData),
-                              ChangeNotifierProvider<DataNotifier>(create: (ctx) => DataNotifier(ctx),),
-                             ],
-                             child: ScreenController(),); 
-                           
-                          },
-                        ),
-                      );
-                    } else {
-                      Fluttertoast.showToast(
-                          msg: "Something is Wrong :( ",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: kTinder,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                      _audioCache.play('sound5.mp3');
-                      setState(() {
-                        _isLoading = false;
-                        _animationType = "fail";
-                      });
-                    }
-                  
+
+  getUserData() async {
+    setState(() {
+      _isLoading = true;
+    });
+    bool isValid =
+        await _dataBundle.networkLoader.checkUsername(_userController.text);
+    if (isValid) {
+      _audioCache.play('happy1.mp3');
+      setState(() {
+        _animationType = "success";
+      });
+      final _user = await _dataBundle.getUserData(_userController.text);
+      final _userBigData = await _dataBundle.getUserBigData(_user.map['login']);
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          transitionDuration: Duration(seconds: 3),
+          pageBuilder: (_, __, context) {
+            return MultiProvider(
+              providers: [
+                Provider<User>.value(value: _user),
+                Provider<UserBigData>.value(value: _userBigData),
+                ChangeNotifierProvider<DataNotifier>(
+                  create: (ctx) => DataNotifier(ctx),
+                ),
+              ],
+              child: ScreenController(),
+            );
+          },
+        ),
+      );
+    } else {
+      Fluttertoast.showToast(
+          msg: "Something is Wrong :( ",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: kTinder,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      _audioCache.play('sound5.mp3');
+      setState(() {
+        _isLoading = false;
+        _animationType = "fail";
+      });
+    }
   }
 
   @override
@@ -103,7 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Container(
                 alignment: Alignment.center,
                 child: CircleAvatar(
-                  radius: size.width*0.3,
+                  radius: size.width * 0.3,
                   backgroundColor: Theme.of(context).accentColor,
                   child: GestureDetector(
                     onTap: () {
@@ -125,14 +123,14 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               flex: 2,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: size.width*0.1),
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
                 alignment: Alignment.topCenter,
                 child: TextField(
                   controller: _userController,
                   focusNode: _userFocusNode,
-         onSubmitted: (_){
-             getUserData();
-         },       
+                  onSubmitted: (_) {
+                    getUserData();
+                  },
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: 'Balsamiq',
@@ -142,14 +140,14 @@ class _SearchScreenState extends State<SearchScreen> {
                     fillColor: Colors.white,
                     filled: true,
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(size.width*0.1),
+                      borderRadius: BorderRadius.circular(size.width * 0.1),
                       borderSide: BorderSide(
                         color: Theme.of(context).accentColor,
                         width: 4,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(size.width*0.1),
+                      borderRadius: BorderRadius.circular(size.width * 0.1),
                       borderSide: BorderSide(
                         color: Theme.of(context).accentColor,
                         width: 4,
@@ -161,38 +159,42 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Expanded(
               child: Container(
-                
                 alignment: Alignment.topCenter,
-                padding: EdgeInsets.only(left: size.width*0.3, right: size.width*0.3, bottom: size.width*0.1),
-                child: _isLoading? SpinKitChasingDots(
-                  color: Theme.of(context).accentColor,
-                ) : GestureDetector(
-                  onTap: getUserData,child: Visibility(
-                    visible: !_isLoading,
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                          borderRadius: BorderRadius.circular(size.width*0.1)),
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          'Search',
-                          style: TextStyle(
-                              color: kPrimary,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Raleway',
-                              fontSize: size.width*0.08
+                padding: EdgeInsets.only(
+                    left: size.width * 0.3,
+                    right: size.width * 0.3,
+                    bottom: size.width * 0.1),
+                child: _isLoading
+                    ? SpinKitChasingDots(
+                        color: Theme.of(context).accentColor,
+                      )
+                    : GestureDetector(
+                        onTap: getUserData,
+                        child: Visibility(
+                          visible: !_isLoading,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).accentColor,
+                                borderRadius:
+                                    BorderRadius.circular(size.width * 0.1)),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                'Search',
+                                style: TextStyle(
+                                    color: kPrimary,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Raleway',
+                                    fontSize: size.width * 0.08),
                               ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
               ),
             ),
-          
             Expanded(
               child: Container(
                 alignment: Alignment.center,
@@ -204,7 +206,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       'Gitoo',
                       style: TextStyle(
                           color: Theme.of(context).accentColor,
-                          fontSize: size.width*0.12,
+                          fontSize: size.width * 0.12,
                           fontFamily: 'Raleway',
                           fontWeight: FontWeight.w700),
                     ),

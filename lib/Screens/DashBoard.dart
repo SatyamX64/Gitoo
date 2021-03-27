@@ -46,12 +46,12 @@ class _DashBoardState extends State<DashBoard> {
               flex: 3,
               child: Container(
                 alignment: Alignment.bottomRight,
-                padding: EdgeInsets.only(left: size.width*0.4, right: 10),
+                padding: EdgeInsets.only(left: size.width * 0.4, right: 10),
                 color: Theme.of(context).primaryColor,
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    '${dataNotifier.user.map['name']?? 'Not Available'}',
+                    '${dataNotifier.user.map['name'] ?? 'Not Available'}',
                     style: kUserNameStyle,
                   ),
                 ),
@@ -67,13 +67,14 @@ class _DashBoardState extends State<DashBoard> {
                     Expanded(
                       flex: 12,
                       child: Container(
-                        margin: EdgeInsets.only(left: size.width*0.2, bottom: size.width*0.05),
-                  alignment: Alignment.centerRight,
+                        margin: EdgeInsets.only(
+                            left: size.width * 0.2, bottom: size.width * 0.05),
+                        alignment: Alignment.centerRight,
                         child: NeumorphicBox(
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '${dataNotifier.user.map['email']?? 'Not Available'}',
+                              '${dataNotifier.user.map['email'] ?? 'Not Available'}',
                               style: kEmailStyle,
                             ),
                           ),
@@ -98,7 +99,7 @@ class _DashBoardState extends State<DashBoard> {
                               isPressed: selectedList == 0 ? true : false,
                             ),
                             SizedBox(
-                              width: size.width*0.06,
+                              width: size.width * 0.06,
                             ),
                             CategoryButton(
                               title: 'Following',
@@ -113,7 +114,7 @@ class _DashBoardState extends State<DashBoard> {
                               isPressed: selectedList == 1 ? true : false,
                             ),
                             SizedBox(
-                              width: size.width*0.06,
+                              width: size.width * 0.06,
                             ),
                             CategoryButton(
                               title: 'Starred',
@@ -133,7 +134,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                     ),
                     SizedBox(
-                      height: size.width*0.04,
+                      height: size.width * 0.04,
                     ),
                     Expanded(
                       flex: 44,
@@ -147,8 +148,8 @@ class _DashBoardState extends State<DashBoard> {
                                 child: dataLists[selectedList],
                               ),
                             ),
-                           SizedBox(
-                              width: size.width*0.06,
+                            SizedBox(
+                              width: size.width * 0.06,
                             ),
                             Expanded(
                               flex: 9,
@@ -171,9 +172,9 @@ class _DashBoardState extends State<DashBoard> {
                                       isPressed:
                                           selectedList == 3 ? true : false,
                                     ),
-                                   SizedBox(
-                      height: size.width*0.04,
-                    ),
+                                    SizedBox(
+                                      height: size.width * 0.04,
+                                    ),
                                     CategoryButton(
                                       count: dataNotifier.userBigData
                                           .map['organisations'].length,
@@ -197,7 +198,7 @@ class _DashBoardState extends State<DashBoard> {
                       ),
                     ),
                     SizedBox(
-                      height: size.width*0.04,
+                      height: size.width * 0.04,
                     ),
                     Expanded(
                       flex: 10,
@@ -229,7 +230,7 @@ class _DashBoardState extends State<DashBoard> {
           top: (MediaQuery.of(context).size.height) / 20,
           left: 10,
           child: CircleAvatar(
-            radius: size.width*0.20,
+            radius: size.width * 0.20,
             backgroundColor: Colors.transparent,
             child: FlareActor(
               'assets/Loading.flr',
@@ -240,16 +241,19 @@ class _DashBoardState extends State<DashBoard> {
         ),
         Positioned(
           top: (MediaQuery.of(context).size.height) / 10,
-          left: size.width*0.12,
+          left: size.width * 0.12,
           child: Container(
             decoration: BoxDecoration(
               boxShadow: [
-                BoxShadow(color: Theme.of(context).accentColor, blurRadius: 15, spreadRadius: 5),
+                BoxShadow(
+                    color: Theme.of(context).accentColor,
+                    blurRadius: 15,
+                    spreadRadius: 5),
               ],
               shape: BoxShape.circle,
             ),
             child: CircleAvatar(
-              radius: size.width*0.11,
+              radius: size.width * 0.11,
               backgroundColor: kSecondary,
               backgroundImage:
                   NetworkImage(dataNotifier.user.map['avatar_url']),
@@ -265,7 +269,11 @@ class _DashBoardState extends State<DashBoard> {
               color: Colors.transparent,
               child: Text(
                 'Gitoo',
-                style: kGitooTheme,
+                style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontSize: size.width * 0.12,
+                    fontFamily: 'Raleway',
+                    fontWeight: FontWeight.w700),
               ),
             ),
           ),
