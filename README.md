@@ -1,16 +1,17 @@
-# gitoo
+# Gitoo ʕ•ᴥ•ʔ
 
-A Basic Application using Git Hub APIs to fetch the data of a User. It implements HTTP calls, Provider and Animation. 
+A Basic Application using Git Hub APIs to fetch the data of a User. It implements HTTP calls, Provider and Animation at a very basic level. 
 
-## Getting Started
+Here are some screenshots of the App ☀️ 
 
-This project is a starting point for a Flutter application.
+![1](https://user-images.githubusercontent.com/62766656/113477079-3a128280-949d-11eb-8d22-75e5f9602578.png)
 
-A few resources to get you started if this is your first Flutter project:
+![2](https://user-images.githubusercontent.com/62766656/113477080-3aab1900-949d-11eb-903d-8b5c6084436b.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![3](https://user-images.githubusercontent.com/62766656/113477081-3b43af80-949d-11eb-812b-2805898e89dd.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![4](https://user-images.githubusercontent.com/62766656/113477082-3c74dc80-949d-11eb-8a28-6e6ec7916d86.png)
+
+![5](https://user-images.githubusercontent.com/62766656/113477083-3d0d7300-949d-11eb-8237-46da7a1f0f36.png)
+
+![6](https://user-images.githubusercontent.com/62766656/113477078-3848bf00-949d-11eb-89e5-020faa8bcbb0.png)
